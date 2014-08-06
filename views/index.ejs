@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <!-- polyfill for eventsource -->
+    <script src="./js/eventsource.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+
+<script>
+    if (!!window.EventSource) {
+        var source = new EventSource('/stream');
+    } else {
+        alert("There was an error initializing EventSource!");
+    }
+    source.addEventListener('message', function(e) {
+        console.log(e.data);
+        $("#msg").html(e.data);
+    }, false);
+
+    source.addEventListener('open', function(e) {
+       console.log(" open event: " + e);
+    }, false);
+
+    source.addEventListener('error', function(e) {
+        if (e.readyState == EventSource.CLOSED) {
+            console.log(" close event: " + e);
+        }
+    }, false);
+
+</script>
+
+
+
+<h1><%= title %></h1>
+
+<p>Welcome to <%= title %></p>
+<div id="msg"></div>
+
+<a href="http://localhost:3001/solr">Solr Index Proxy</a>
+</body>
+</html>
