@@ -59,7 +59,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
             try {
                 var obj = JSON.parse(raw.join(''));
 
-                console.log(JSON.stringify(obj, undefined, 2));
+//                console.log("HOOOOOOOOOOOOOOPIE:" + JSON.stringify(obj, undefined, 2));
 
                 // ID should be unique
                 doc.id = obj.feature.id;

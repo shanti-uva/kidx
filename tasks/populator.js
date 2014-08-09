@@ -162,7 +162,6 @@ exports.populateTermIndex = function(host, callback) {
             console.log("iterate: " + kid);
             km.getKmapsDocument(kid,function(err, doc){
                 sm.addTerms([ doc ],function(err,response) {
-                    console.log (" Error contacting " + JSON.stringify(sm.term_index_options, undefined, 2));
                     callback(err, response);
                 });
             });
