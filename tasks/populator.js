@@ -11,6 +11,7 @@
 
 var mb = require("../connectors/mediabase");
 var ss = require("../connectors/sharedshelf");
+var km = require("../connectors/kmaps");
 var async = require("async");
 var sm = require("../connectors/solrmanager");
 var _ = require("underscore");
@@ -125,12 +126,62 @@ exports.populateIndexByServiceId = function (serviceConnector, id, callback) {
 exports.rangePopulateIndexByService = function (serviceConnector, start, finish, callback) {
     async.concatSeries(_.range(start,finish+1), function(id,cb){
         exports.populateIndexByServiceId(serviceConnector, id, function( err, ret) {
-            cb(err,ret);
+            if (err) {
+                console.log("There was an error for id = " + id + ".   Ignoring and returning null" );
+                cb(null,null);
+            } else {
+                cb(null,ret);
+            }
         });
     },
     function(err,ret) {
+
+        // Shouldn't ever see an err
         console.log("2Err = " + err);
         console.log("2Ret = " + JSON.stringify(ret));
         callback(err,ret);
     });
+}
+
+exports.populateTermIndex = function(host, callback) {
+
+    km.getKmapsList(host,function(err,list){
+
+        console.log("Err = " + err);
+        async.concatSeries(list, function iterator(kid,callback) {
+
+/////  ARGH THIS IS JUST WRONG!  REFACTOR THIS SUCKER! /////////
+
+                if (host === "dev-subjects.kmaps.virginia.edu") {
+                    kid = "subjects-" + kid;
+                } else {
+                    kid = "places-" + kid;
+                }
+
+/////////////////////////////////////////////////////////
+            console.log("iterate: " + kid);
+            km.getKmapsDocument(kid,function(err, doc){
+                sm.addTerms([ doc ],function(err,response) {
+                    console.log (" Error contacting " + JSON.stringify(sm.term_index_options, undefined, 2));
+                    callback(err, response);
+                });
+            });
+        },
+        function final(err,results) {
+            console.log("final: " + err +"\n" + results);
+        });
+    });
+
+
+
+
+
+
+    ///  HEY YUJI!   LOOK AT MANAGED SCHEMA:
+
+    // https://cwiki.apache.org/confluence/display/solr/Managed+Schema+Definition+in+SolrConfig
+
+
+
+
 }

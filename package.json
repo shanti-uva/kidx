@@ -15,7 +15,8 @@
     "nimble": "*",
     "solr": "*",
     "underscore": "*",
-    "http-proxy": "*"
+    "http-proxy": "*",
+    "traverse": "*"
   },
   "devDependencies": {
     "coveralls": "^2.11.1",

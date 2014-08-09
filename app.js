@@ -65,14 +65,18 @@ http.createServer(app).listen(app.get('port'), function () {
         var rgx = /kmapid:(.*)/;  //need to refine this regex!
         var match = rgx.exec(q);
 
+        var ko = require('./connectors/solrmanager').asset_index_options;
+
         if (match !== null && match.length > 1)  {
             console.log("We extracted " + match[1]);
             pop.populateIndexByKMapIdStale(match[1], STALE_TIME,
                 function() {
-                    proxy.web(req, res, { target: 'http://localhost:8983' });
+                    console.dir(ko);
+                    proxy.web(req, res, { target: 'http://' + ko.host + ':' + ko.port });
                 });
         } else {
-            proxy.web(req, res, { target: 'http://localhost:8983' });
+            console.dir(ko);
+            proxy.web(req, res, { target: 'http://' + ko.host + ':' + ko.port });
         }
     });
 

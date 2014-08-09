@@ -2,29 +2,45 @@
  * Created by ys2n on 7/18/14.
  */
 
-
 var solr = require('solr-client');
-var client = solr.createClient(
-    {
-        'host': 'drupal-index.shanti.virginia.edu',
-        'port': 80,
-        'path': '/solr-test',
-        'core': '/kmindex'
-    }
-);
 
-var termclient = solr.createClient(
-    {
-        'host': 'drupal-index.shanti.virginia.edu',
-        'port': 80,
-        'path': '/solr-test',
-        'core': '/kmterms'
-    }
-);
+var asset_index_options = {
+    'host': 'kidx.shanti.virginia.edu',
+    'port': 80,
+    'path': '/solr',
+    'core': 'kmindex'
+}
+
+//var asset_index_options = {
+//    'host': 'drupal-index.shanti.virginia.edu',
+//    'port': 80,
+//    'path': '/solr-test',
+//    'core': '/kmindex'
+//};
+
+var term_index_options = {
+    'host': 'kidx.shanti.virginia.edu',
+    'port': 80,
+    'path': '/solr',
+    'core': 'termindex'
+}
+
+//var term_index_options = {
+//    'host': 'drupal-index.shanti.virginia.edu',
+//    'port': 80,
+//    'path': '/solr-test',
+//    'core': '/kmterms'
+//};
+
+var asset_client = solr.createClient(asset_index_options);
+var term_client = solr.createClient(term_index_options);
+
+exports.term_index_options = term_index_options;
+exports.asset_index_options = asset_index_options;
 
 exports.addDocs = function (docs, callback) {
-    client.autoCommit = true;
-    client.add(docs, function (err, report) {
+    asset_client.autoCommit = true;
+    asset_client.add(docs, function (err, report) {
         // console.dir(docs);
         if (err) {
             console.log(err);
@@ -37,9 +53,9 @@ exports.addDocs = function (docs, callback) {
 }
 
 exports.lastUpdated = function (uid, callback) {
-    var query = client.createQuery().q("uid:" + uid)
+    var query = asset_client.createQuery().q("uid:" + uid)
 
-    client.search(query, function (err, obj) {
+    asset_client.search(query, function (err, obj) {
         if (err) {
             console.log("lastUpdated() Error:");
             console.dir(err);
@@ -57,8 +73,8 @@ exports.lastUpdated = function (uid, callback) {
 }
 
 exports.addTerms = function (terms, callback) {
-    termclient.autoCommit = true;
-    termclient.add(terms, function (err, report) {
+    term_client.autoCommit = true;
+    term_client.add(terms, function (err, report) {
         if (err) {
             console.log(err);
         } else {

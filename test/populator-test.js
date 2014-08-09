@@ -23,7 +23,7 @@ var populateIndexByKMapId = populator.populateIndexByKMapId;
 
 const STALE_TIME = 20 * 1000 // 100 seconds;
 
-if(true) {
+if(false) {
     docuid_fixtures.forEach (
         function(x) {
             exports["testDocumentCheck-" + x.uid] = function(test) {
@@ -44,7 +44,7 @@ if(true) {
 }
 
 
-if(true) {
+if(false) {
     kmapid_fixtures.forEach(
         function(x) {
             exports["testPopulateIndexByKMapIdStale-" + x.id] = function(test) {
@@ -81,7 +81,7 @@ if(false) {
     );
 }
 
-if(true) {
+if(false) {
     kmapid_fixtures.forEach(
         function(x) {
             exports["testRePopulateIndexByKMapIdStale-" + x.id] = function(test) {
@@ -101,7 +101,7 @@ if(true) {
 
 
 
-if(true)
+if(false)
 kmapid_fixtures.forEach(
     function(x) {
         exports["testGetDocumentsByKMapId- " + x.id] = function(test) {
@@ -120,11 +120,11 @@ kmapid_fixtures.forEach(
     }
 )
 
-if(true)
+if(false)
 exports["rangePopulateMediaBase"] = function(test) {
     var mb = require("../connectors/mediabase");
     test.expect(1);
-    populator.rangePopulateIndexByService(mb,2500,2510,function(err,ret) {
+    populator.rangePopulateIndexByService(mb,2100,2160,function(err,ret) {
         console.log("Err = " + err);
         console.log("Ret = " + ret);
         test.ok(true);
@@ -134,7 +134,7 @@ exports["rangePopulateMediaBase"] = function(test) {
 }
 
 
-if(true)
+if(false)
 exports["missing pdid"] = function (test) {
     var mb = require("../connectors/mediabase");
 
@@ -149,7 +149,7 @@ exports["missing pdid"] = function (test) {
 
 }
 
-if(true) {
+if(false) {
     docuid_fixtures.forEach (
         function(x) {
             exports["reTestDocumentCheck-" + x.uid] = function(test) {
@@ -169,10 +169,10 @@ if(true) {
 }
 
 
-if(true)
+if(false)
     exports["non-existent resource"] = function (test) {
-        var mb = require("../connectors/mediabase");
-
+//        var mb = require("../connectors/mediabase");
+        test.expect(2);
         populator.populateIndexByServiceId(mb, 9999999, function( err, ret) {
             console.log("The Error = " + err);
             console.log("The Return = " + JSON.stringify(ret));
@@ -181,3 +181,21 @@ if(true)
             test.done();
         });
     }
+
+
+
+if (true)
+exports["harvest kmaps"] = function(test) {
+
+    test.expect(2);
+    populator.populateTermIndex(
+        "dev-subjects.kmaps.virginia.edu",
+        function(err,ret) {
+        console.log("The Error = " + err);
+        console.log("The Return = " + JSON.stringify(ret));
+        test.ok(err === null);
+        test.ok(ret !== null);
+        test.done();
+    });
+
+}
