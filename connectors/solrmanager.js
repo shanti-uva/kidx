@@ -52,25 +52,61 @@ exports.addDocs = function (docs, callback) {
 
 }
 
-exports.lastUpdated = function (uid, callback) {
-    var query = asset_client.createQuery().q("uid:" + uid)
+exports.lastUpdated = function (solrclient, uid, callback) {
+    var query = solrclient.createQuery().q("uid:" + uid)
 
-    asset_client.search(query, function (err, obj) {
+    solrclient.search(query, function (err, obj) {
         if (err) {
-            console.log("lastUpdated() Error:");
+            console.log("lastUpdated() Error using solrclient: " + JSON.stringify(solrclient.options));
             console.dir(err);
         } else {
-//            console.log("lastUpdated(): " + JSON.stringify(obj,undefined,2));
+            console.log("assetLastUpdated(): " + JSON.stringify(obj, undefined, 2));
             if (obj.response.numFound == 0) {
                 console.log("calling back null,0 to " + callback);
                 callback(null, 0);
             } else if (obj.response.docs[0].timestamp) {
                 callback(null, new Date(obj.response.docs[0].timestamp).getTime());
+            } else if (obj.response.docs[0]["_timestamp_"]) {
+                callback(null, new Date(obj.response.docs[0]["_timestamp_"]).getTime())
             }
 
         }
     });
 }
+
+exports.assetLastUpdated = function (uid, callback) {
+    exports.lastUpdated(asset_client,uid, callback);
+}
+
+exports.termLastUpdated = function (uid, callback) {
+    exports.lastUpdated(term_client, uid, callback);
+}
+
+exports.getAssetEtag = function (uid, callback) {
+    var query = asset_client.createQuery().q("uid:" + uid)
+
+    asset_client.search(query, function (err, obj) {
+        if (err) {
+            console.log("getAssetEtag() Error:");
+            console.dir(err);
+        } else {
+            console.log("getAssetEtag(): " + JSON.stringify(obj,undefined,2));
+            if (obj.response.numFound == 0) {
+                console.log("calling back null,null to " + callback);
+                callback(null, null);
+            } else if (obj.response.docs[0].etag) {
+                callback(null, obj.response.docs[0].etag);
+            }
+        }
+    });
+}
+
+
+
+
+
+
+
 
 exports.addTerms = function (terms, callback) {
     term_client.autoCommit = true;

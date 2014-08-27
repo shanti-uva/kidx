@@ -3,9 +3,12 @@
  */
 
 var sm = require("../connectors/solrmanager");
+var xmldom = require("xmldom");
 var solr = require("solr-client");
 var mb = require("../connectors/mediabase");
 var ss = require("../connectors/sharedshelf");
+var km = require("../connectors/kmaps");
+
 var async = require("async");
 
 const DATA = ["subjects-1300", "places-13656", "subjects-6662", 'places-15401', 'places-13656', "subjects-5956",
@@ -13,14 +16,79 @@ const DATA = ["subjects-1300", "places-13656", "subjects-6662", 'places-15401', 
     'subjects-2823'];
 
 
-exports.testLastUpdated = function(test) {
+exports.testAssetLastUpdated = function (test) {
 
-    sm.lastUpdated("mediabase-168", function(err,timestamp) {
-            console.log("last checked: " + timestamp);
-            console.log(new Date().getTime());
+
+    async.series([
+        function (callback) {
+            sm.assetLastUpdated("mediabase-168", function (err, timestamp) {
+                    console.log("last updated: " + timestamp);
+                    console.log("current time: " + new Date().getTime());
+                    callback(null,"original timestamp: " + timestamp + " " + new Date(timestamp));
+                }
+            );
+        },
+        function (callback) {
+            mb.getDocument("mediabase-168",
+                function (err, docs) {
+                    console.log("ADDING: " + JSON.stringify(docs, undefined, 2));
+                    sm.addDocs(docs, callback);
+                });
+        },
+        function (callback) {
+            sm.assetLastUpdated("mediabase-168", function (err, timestamp) {
+                    console.log("last updated: " + timestamp);
+                    console.log("current time: " + new Date().getTime());
+                    callback(null,"resultant timestamp: " + timestamp + " " + new Date(timestamp));
+                }
+            );
+        }],
+        function (errors,results) {
+            console.dir(errors);
+            console.dir(results);
+            console.log("DONE");
             test.done();
-        }
-    );
+
+        })
+}
+
+exports.testTermLastUpdated = function(test) {
+
+
+
+    async.series([
+        function (callback) {
+            sm.termLastUpdated("places-168", function (err, timestamp) {
+                    console.log("last updated: " + timestamp);
+                    console.log("current time: " + new Date().getTime());
+                    callback(null,"original timestamp: " + timestamp + " " + new Date(timestamp));
+                }
+            );
+        },
+        function (callback) {
+            km.getKmapsDocument("places-168",
+                function (err, terms) {
+                    console.log("ADDING: " + JSON.stringify(terms, undefined, 2));
+                    sm.addTerms(terms, callback);
+                });
+        },
+        function (callback) {
+            sm.termLastUpdated("places-168", function (err, timestamp) {
+                    console.log("last updated: " + timestamp);
+                    console.log("current time: " + new Date().getTime());
+                    callback(null,"resultant timestamp: " + timestamp + " " + new Date(timestamp));
+                }
+            );
+        }],
+        function (errors,results) {
+            console.dir(errors);
+            console.dir(results);
+            console.log("DONE");
+            test.done();
+
+        })
+
+
 
 }
 
@@ -55,7 +123,7 @@ exports.addDocsTestSS = function (test) {
 
 
 
-if (false)
+if (true)
 exports.addDocsTestMB = function (test) {
 
     const CONCURRENCY = 2;
@@ -76,7 +144,7 @@ exports.addDocsTestMB = function (test) {
 
 };
 
-if (false)
+if (true)
 exports.addDocsTest2 = function (test) {
 
     test.expect(2);
@@ -124,4 +192,19 @@ exports.checkIndexCounts = function (test) {
 
 
 
+
+
+if (true)
+
+exports['test Etags'] = function(test) {
+
+sm.getAssetEtag("mediabase-524",function(err,etag) {
+
+    console.log(etag);
+
+
+})
+
+
+}
 

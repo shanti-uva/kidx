@@ -132,6 +132,7 @@ exports.getDocument = function (docid, callback) {
                 if(obj.pdid) obj.pdid.forEach( function(x) {kmapids.push(
                     "places-" + x)});
 
+                if (res.headers.etag) { doc.etag = res.headers.etag }
                 doc.kmapid = _.unique(kmapids);
                 doc.url = obj.url;
                 doc.bundle = obj.bundle;

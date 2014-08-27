@@ -16,7 +16,8 @@
     "solr": "*",
     "underscore": "*",
     "http-proxy": "*",
-    "traverse": "*"
+    "traverse": "*",
+    "xmldom": "*"
   },
   "devDependencies": {
     "coveralls": "^2.11.1",

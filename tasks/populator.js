@@ -18,7 +18,7 @@ var _ = require("underscore");
 
 exports.documentStale = function (documentUid, staleTime, callback) {
     var now = new Date().getTime();
-    sm.lastUpdated(documentUid, function(err, timestamp) {
+    sm.assetLastUpdated(documentUid, function(err, timestamp) {
 
         console.log("documentStale:")
 //        console.log("   now       = " + now);
@@ -145,42 +145,66 @@ exports.rangePopulateIndexByService = function (serviceConnector, start, finish,
 
 exports.populateTermIndex = function(host, callback) {
 
+    const CONCURRENCY = 10;
     km.getKmapsList(host,function(err,list){
 
         console.log("Err = " + err);
-        async.concatSeries(list, function iterator(kid,callback) {
+        async.eachLimit(list, CONCURRENCY, function iterator(kid,callback) {
 
 /////  ARGH THIS IS JUST WRONG!  REFACTOR THIS SUCKER! /////////
 
-                if (host === "dev-subjects.kmaps.virginia.edu") {
+                console.log("host = " + host);
+                var ord = (_.indexOf(list, kid, false) + 1) + "/" + list.length;
+                console.log("kid = " + kid + " (" + ord  + ")");
+
+                if (host.indexOf("subjects") > -1) {
                     kid = "subjects-" + kid;
                 } else {
                     kid = "places-" + kid;
                 }
 
+
 /////////////////////////////////////////////////////////
             console.log("iterate: " + kid);
+
+
+            //  DO CHECKSUM or ETAGS check here
+
             km.getKmapsDocument(kid,function(err, doc){
-                sm.addTerms([ doc ],function(err,response) {
-                    callback(err, response);
-                });
+
+                if (err) {
+                    console.log("Error retrieving " + kid );
+
+                }
+
+                if (doc !== null) {
+
+                    console.log("writing: " + JSON.stringify(doc, undefined, 2));
+                    console.log("writing: (" + ord + ")");
+
+                    //  DO UPDATE CHECK HERE OR DURING ADDTERMS?
+    //                sm.assetLastUpdated(doc.id)
+
+
+
+                    sm.addTerms([ doc ],function(err,response) {
+                        console.dir(response);
+                        callback(err);
+                    });
+                }
             });
         },
-        function final(err,results) {
-            console.log("final: " + err +"\n" + results);
+        function final(err) {
+            console.log("final: done!");
         });
     });
 
-
-
-
-
-
-    ///  HEY YUJI!   LOOK AT MANAGED SCHEMA:
-
-    // https://cwiki.apache.org/confluence/display/solr/Managed+Schema+Definition+in+SolrConfig
-
-
+    // + differentiate subject and places in the index!
+    // + Use updated_at for freshness.
+    // + see about managed schema https://cwiki.apache.org/confluence/display/solr/Managed+Schema+Definition+in+SolrConfig
+    // + consider locking down schema after it settles down
+    // + learn about copyfield for index searches
+    // + need to handle transient errors
 
 
 }

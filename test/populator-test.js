@@ -14,12 +14,14 @@ kmapid_fixtures = [
 ]
 
 docuid_fixtures = [
-    { uid: "sharedshelf-2652877" },
+    { uid: "mediabase-524"},
+  //  { uid: "sharedshelf-2652877" },
     { uid: "mediabase-2036" }
 ];
 
 var populator = require("../tasks/populator");
 var populateIndexByKMapId = populator.populateIndexByKMapId;
+var mb = require("../connectors/mediabase");
 
 const STALE_TIME = 20 * 1000 // 100 seconds;
 
@@ -42,6 +44,27 @@ if(false) {
         }
     );
 }
+
+if(false) {
+    docuid_fixtures.forEach (
+        function(x) {
+            exports["testPopulateDocument-" + x.uid] = function(test) {
+                test.expect(1);
+                populator.populateIndexByServiceId(mb, x.uid, function(err,ret) {
+
+                    console.log("Err = " + err);
+                    console.log("Ret = " + ret);
+
+                    test.ok(ret !== null);
+                    test.done();
+                })
+            }
+        }
+    );
+}
+
+
+
 
 
 if(false) {
@@ -124,7 +147,7 @@ if(false)
 exports["rangePopulateMediaBase"] = function(test) {
     var mb = require("../connectors/mediabase");
     test.expect(1);
-    populator.rangePopulateIndexByService(mb,2100,2160,function(err,ret) {
+    populator.rangePopulateIndexByService(mb,1,2160,function(err,ret) {
         console.log("Err = " + err);
         console.log("Ret = " + ret);
         test.ok(true);
@@ -171,7 +194,7 @@ if(false) {
 
 if(false)
     exports["non-existent resource"] = function (test) {
-//        var mb = require("../connectors/mediabase");
+        var mb = require("../connectors/mediabase");
         test.expect(2);
         populator.populateIndexByServiceId(mb, 9999999, function( err, ret) {
             console.log("The Error = " + err);
@@ -184,18 +207,34 @@ if(false)
 
 
 
-if (true)
-exports["harvest kmaps"] = function(test) {
+if (false)
+exports["harvest subjects"] = function(test) {
 
     test.expect(2);
     populator.populateTermIndex(
-        "dev-subjects.kmaps.virginia.edu",
+        "subjects.kmaps.virginia.edu",
         function(err,ret) {
         console.log("The Error = " + err);
-        console.log("The Return = " + JSON.stringify(ret));
+        console.log("The Return = " + ret.length + " items");
         test.ok(err === null);
         test.ok(ret !== null);
         test.done();
     });
 
 }
+
+if (true)
+    exports["harvest places"] = function(test) {
+
+        test.expect(2);
+        populator.populateTermIndex(
+            "places.kmaps.virginia.edu",
+            function(err,ret) {
+                console.log("The Error = " + err);
+                console.log("The Return = " + ret.length + " items");
+                test.ok(err === null);
+                test.ok(ret !== null);
+                test.done();
+            });
+
+    }

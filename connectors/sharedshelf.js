@@ -74,9 +74,6 @@ exports.getItemIdList = function (id, callback) {
 
 exports.getDocument = function (docid, callback) {
 
-    var dom = require('xmldom').DOMParser
-    var xpath = require('xpath');
-    var parseString = require('xml2js').parseString;
     var http = require('http');
 
     var options = {

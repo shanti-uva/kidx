@@ -6,10 +6,7 @@ var _ = require('underscore');
 var traverse = require('traverse');
 var http = require('http');
 
-exports.getKmapsDocument = function (kmapid, callback) {
-
-    // This is a "universal" kmapid.   Translate!
-
+function grokKClass(kmapid) {
     var parts = kmapid.split('-');
     var kclass = parts[0];
     var kid = parts[1];
@@ -18,9 +15,17 @@ exports.getKmapsDocument = function (kmapid, callback) {
     if (kclass !== "subjects" && kclass !== "places") {
         throw new Error("unknown kclass " + kclass + " in kmapid " + kmapid);
     }
+    return {kclass: kclass, kid: kid};
+}
+exports.getKmapsDocument = function (kmapid, callback) {
+
+    // This is a "universal" kmapid.   Translate!
+    var __ret = grokKClass(kmapid);
+    var kclass = __ret.kclass;
+    var kid = __ret.kid;
 
     var options = {
-        host: 'dev-' + kclass + '.kmaps.virginia.edu',
+        host: kclass + '.kmaps.virginia.edu',
         port: 80,
         path: '/features/' + kid + ".json",
         method: 'GET'
@@ -48,8 +53,8 @@ exports.getKmapsDocument = function (kmapid, callback) {
 //            'created_at': null,
 //            'updated_at': null
 //        };
-        // console.log('STATUS: ' + res.statusCode);
-//        console.log('HEADERS: ' + JSON.stringify(res.headers));
+        console.log('STATUS: ' + res.statusCode);
+        console.log('HEADERS: ' + JSON.stringify(res.headers));
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             raw.push(chunk);
@@ -59,26 +64,32 @@ exports.getKmapsDocument = function (kmapid, callback) {
             try {
                 var obj = JSON.parse(raw.join(''));
 
-//                console.log("HOOOOOOOOOOOOOOPIE:" + JSON.stringify(obj, undefined, 2));
+                console.log("HOOOOOOOOOOOOOOPIE:" + JSON.stringify(obj, undefined, 2));
 
+                if (res.headers.etag) {
+                    doc.etag = res.headers.etag
+                }
                 // ID should be unique
-                doc.id = obj.feature.id;
+                doc.id = kclass + "-" + obj.feature.id;
 
                 // Header
                 doc.header = obj.feature.header;
 
                 // Feature_types
-                if (obj.feature_types)
-                obj.feature.feature_types.forEach(function (x) {
+                if (obj.feature.feature_types)
+                    obj.feature.feature_types.forEach(function (x) {
 
-                    addEntry(doc, 'feature_types', x.title);
-                    // doc.feature_types.push(x.title);
-                    addEntry(doc, 'feature_type_ids', x.id)
-                    // doc.feature_type_ids.push(x.id);
-                });
+                        addEntry(doc, 'feature_types', x.title);
+                        // doc.feature_types.push(x.title);
+                        addEntry(doc, 'feature_type_ids', x.id)
+                        // doc.feature_type_ids.push(x.id);
+                    });
 
                 // Names:  these will be joined in the index
-                // console.log(JSON.stringify(obj.feature.names,undefined,2))
+                // console.log(JSON.stringify(obj.feature.names, undefined, 2))
+
+
+                // NEED TO USE THE names INTERFACE INSTEAD for completeness
 
                 obj.feature.names.forEach(function (x) {
                     var fieldname = "name_" + x.language + "_" + x.view + "_" + x.writing_system + ((x.orthographic_system) ? "_" + x.orthographic_system : "");
@@ -87,7 +98,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
 
 
                 // Captions
-//                console.log(JSON.stringify(obj.feature.captions,undefined,2))
+                // console.log("CAPTIONS:" + JSON.stringify(obj.feature.captions,undefined,2))
                 obj.feature.captions.forEach(function (x) {
                     var lang = x.language;
                     var content = x.content;
@@ -118,18 +129,54 @@ exports.getKmapsDocument = function (kmapid, callback) {
                 });
 
 
+                // ANCESTORS!  by PERSPECTIVE
+
+                if (obj.feature.perspectives) {
+                    obj.feature.perspectives.forEach(function (pers) {
+                        pers.ancestors.forEach(function (x) {
+                            var ancestor = x.header;
+                            var ancestorid = x.id;
+
+                            if (!pers) {
+                                pers = { code: null };
+                            }
+                            console.log("ANCESTOR: " + pers.code + ":" + ancestorid + ":" + ancestor);
+
+                            addEntry(doc, 'ancestors_' + pers.code, ancestor);
+                            addEntry(doc, 'ancestor_ids_' + pers.code, ancestorid);
+
+                        })
+                    });
+                } else {
+                    obj.feature.ancestors.forEach(function (x) {
+                    var ancestor = x.header;
+                    var ancestorid = x.id;
+
+                    var pers = "default";
+
+                    console.log("ANCESTOR: " + pers+ ":" + ancestorid + ":" + ancestor);
+
+                    addEntry(doc, 'ancestors_' + pers, ancestor);
+                    addEntry(doc, 'ancestor_ids_' + pers, ancestorid);
+
+                });
+                }
+
+
                 doc.interactive_map_url = obj.feature.interactive_map_url;
                 doc.kmz_url = obj.feature.kmz_url;
                 doc.created_at = obj.feature.created_at;
                 doc.updated_at = obj.feature.updated_at;
                 doc.has_shapes = Boolean(obj.feature.has_shapes);
                 doc.has_altitudes = Boolean(obj.feature.has_altitudes);
-                doc.closest_fid_with_shapes = obj.feature.closest_fid_with_shapes;
+                if (obj.feature.closest_fid_with_shapes)
+                    doc.closest_fid_with_shapes = obj.feature.closest_fid_with_shapes;
                 callback(null, doc);
             }
             catch (err) {
-                throw err;
+//                throw err;
                 console.log("Error: " + err);
+                console.log("Return was: " + raw.join('\n'));
                 callback(err, null);
             }
         })
@@ -137,8 +184,42 @@ exports.getKmapsDocument = function (kmapid, callback) {
 }
 
 
+exports.checkEtag = function (kmapuid, callback) {
+
+    // This is a "universal" kmapid.   Translate!
+    var __ret = grokKClass(kmapuid);
+    var kclass = __ret.kclass;
+    var kid = __ret.kid;
+
+    var options = {
+        host: kclass + '.kmaps.virginia.edu',
+        port: 80,
+        path: '/features/' + kid + ".json",
+        method: 'HEAD'
+    };
+
+    http.request(options, function (res) {
+
+        console.log("Getting HEAD: " + JSON.stringify(options));
+        console.log("HEADERS: " + JSON.stringify(res.headers));
+
+        if (res.headers.etag) {
+            callback(null, res.headers.etag);
+        } else {
+            callback(null, null);
+        }
+
+    })
+
+
+}
+
+
 function addEntry(doc, field, data) {
     // first determine if the field exists
+
+    console.log("addEntry: " + field + " = " + JSON.stringify(data));
+
 
     if (doc[field]) {
         // if it exists and isn't an array convert to an array and re-add value to the array
@@ -149,9 +230,12 @@ function addEntry(doc, field, data) {
 
         // push the new data into the array
         doc[field].push(data);
+        console.log("pushed: " + JSON.stringify(data));
+
     } else {
         // else treat it as a single value
         doc[field] = data;
+        console.log("inserted: " + JSON.stringify(data));
     }
 
 }
@@ -168,16 +252,16 @@ exports.getKmapsTree = function (host, callback) {
 
     var raw = [];
     var obj = {};
-    http.request(kmaps_options, function (res) {
+    http.request(kmaps_options,function (res) {
         try {
             res.setEncoding('utf8');
             res.on('data', function (chunk) {
-//                console.log("data: " + chunk);
+                // console.log("data: " + chunk);
                 raw.push(chunk);
             });
             res.on('end', function () {
                 obj = JSON.parse(raw.join(''));
-//                console.log("end: " + raw.join(''));
+                // console.log("end: " + raw.join(''));
                 callback(null, obj);
             });
 
@@ -192,12 +276,21 @@ exports.getKmapsTree = function (host, callback) {
 }
 
 exports.getKmapsList = function (host, callback) {
-    exports.getKmapsTree(host, function(err,obj) {
+    exports.getKmapsTree(host, function (err, obj) {
         var nodes = traverse(obj).reduce(function (acc, x) {
-            if (x.key) { acc.push(x.key) };
+            if (x.key) {
+                acc.push(x.key)
+            }
+            ;
             return acc;
         }, []);
-        callback(err,nodes);
+        callback(err, nodes);
     });
 
 }
+
+
+// Use etags (and maybe code version?) to determine staleness.
+// Use names api!
+// Add "ancestors"
+// wonder maybe the harvesting should remain here and the services just notify of changes.
