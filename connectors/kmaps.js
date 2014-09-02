@@ -75,10 +75,11 @@ exports.getKmapsDocument = function (kmapid, callback) {
                 // Header
                 doc.header = obj.feature.header;
 
+                doc.tree = kclass;
+
                 // Feature_types
                 if (obj.feature.feature_types)
                     obj.feature.feature_types.forEach(function (x) {
-
                         addEntry(doc, 'feature_types', x.title);
                         // doc.feature_types.push(x.title);
                         addEntry(doc, 'feature_type_ids', x.id)
@@ -90,7 +91,6 @@ exports.getKmapsDocument = function (kmapid, callback) {
 
 
                 // NEED TO USE THE names INTERFACE INSTEAD for completeness
-
                 obj.feature.names.forEach(function (x) {
                     var fieldname = "name_" + x.language + "_" + x.view + "_" + x.writing_system + ((x.orthographic_system) ? "_" + x.orthographic_system : "");
                     doc[fieldname] = x.name;
