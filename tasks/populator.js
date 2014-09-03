@@ -15,6 +15,8 @@ var km = require("../connectors/kmaps");
 var async = require("async");
 var sm = require("../connectors/solrmanager");
 var _ = require("underscore");
+var crypto = require('crypto');
+
 
 exports.documentStale = function (documentUid, staleTime, callback) {
     var now = new Date().getTime();
@@ -143,61 +145,72 @@ exports.rangePopulateIndexByService = function (serviceConnector, start, finish,
     });
 }
 
-exports.populateTermIndex = function(host, callback) {
-
+exports.populateTermIndex = function(host, master_callback) {
+    const LIST_LIMIT = 0; // set to non-zero for testing ONLY
     const CONCURRENCY = 10;
     km.getKmapsList(host,function(err,list){
-
         console.log("Err = " + err);
-        async.eachLimit(list, CONCURRENCY, function iterator(kid,callback) {
 
-/////  ARGH THIS IS JUST WRONG!  REFACTOR THIS SUCKER! /////////
+        // truncating filter useful for testing.
+        if (LIST_LIMIT) {
+            list = _.first(list,LIST_LIMIT);
+        }
+
+        async.mapLimit(list, CONCURRENCY, function iterator(kid,callback) {
 
                 console.log("host = " + host);
                 var ord = (_.indexOf(list, kid, false) + 1) + "/" + list.length;
                 console.log("kid = " + kid + " (" + ord  + ")");
 
+/////  ARGH THIS IS JUST WRONG!  REFACTOR THIS SUCKER! /////////
                 if (host.indexOf("subjects") > -1) {
                     kid = "subjects-" + kid;
                 } else {
                     kid = "places-" + kid;
                 }
-
-
 /////////////////////////////////////////////////////////
-            console.log("iterate: " + kid);
+                console.log("iterate: " + kid);
 
+                //  DO CHECKSUM or ETAGS check here
 
-            //  DO CHECKSUM or ETAGS check here
+                km.getKmapsDocument(kid,function(err, doc){
 
-            km.getKmapsDocument(kid,function(err, doc){
+                    if (err) {
+                        console.log("Error retrieving " + kid );
+                    }
 
-                if (err) {
-                    console.log("Error retrieving " + kid );
+                    if (doc !== null) {
 
-                }
+                        var ck = doc.checksum;
+                        sm.getTermCheckSum(doc.id,function(err,recorded_ck){
+                            // ignore err
 
-                if (doc !== null) {
+                            console.log("CHECKSUMS: " + ck + " ::: " + recorded_ck);
 
-                    console.log("writing: " + JSON.stringify(doc, undefined, 2));
-                    console.log("writing: (" + ord + ")");
+                            if (ck != recorded_ck) {
 
-                    //  DO UPDATE CHECK HERE OR DURING ADDTERMS?
-    //                sm.assetLastUpdated(doc.id)
+                                console.log("writing: " + JSON.stringify(doc, undefined, 2));
+                                console.log("writing: (" + ord + ")");
 
-
-
-                    sm.addTerms([ doc ],function(err,response) {
-                        console.dir(response);
-                        callback(err);
-                    });
-                }
+                                sm.addTerms([ doc ],function(err,response) {
+                                    console.dir(response);
+                                    callback(err,response);
+                                });
+                            } else {
+                                console.log("skipping...  checksums match: " + ck + " === " + recorded_ck);
+                                callback(null,{ "skipping": "checksums match" })
+                            }
+                        });
+                    }
+                });
+            },
+            function final(err,results) {
+                console.log("final: done!");
+                master_callback(err,results);
             });
-        },
-        function final(err) {
-            console.log("final: done!");
-        });
     });
+
+
 
     // + differentiate subject and places in the index!
     // + Use updated_at for freshness.
@@ -207,4 +220,11 @@ exports.populateTermIndex = function(host, callback) {
     // + need to handle transient errors
 
 
+
+}
+
+
+exports.getTermCheckSum = function(id,callback) {
+    // delegate
+    sm.getTermCheckSum(id,callback);
 }

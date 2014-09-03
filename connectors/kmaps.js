@@ -5,6 +5,7 @@
 var _ = require('underscore');
 var traverse = require('traverse');
 var http = require('http');
+var crypto = require('crypto');
 
 function grokKClass(kmapid) {
     var parts = kmapid.split('-');
@@ -162,7 +163,6 @@ exports.getKmapsDocument = function (kmapid, callback) {
                 });
                 }
 
-
                 doc.interactive_map_url = obj.feature.interactive_map_url;
                 doc.kmz_url = obj.feature.kmz_url;
                 doc.created_at = obj.feature.created_at;
@@ -171,6 +171,8 @@ exports.getKmapsDocument = function (kmapid, callback) {
                 doc.has_altitudes = Boolean(obj.feature.has_altitudes);
                 if (obj.feature.closest_fid_with_shapes)
                     doc.closest_fid_with_shapes = obj.feature.closest_fid_with_shapes;
+                doc.checksum = checksum(doc);
+
                 callback(null, doc);
             }
             catch (err) {
@@ -294,3 +296,11 @@ exports.getKmapsList = function (host, callback) {
 // Use names api!
 // Add "ancestors"
 // wonder maybe the harvesting should remain here and the services just notify of changes.
+
+
+function checksum (obj, algorithm, encoding) {
+    return crypto
+        .createHash(algorithm || 'sha1')
+        .update(JSON.stringify(obj), 'utf8')
+        .digest(encoding || 'hex')
+}

@@ -206,8 +206,19 @@ if(false)
     }
 
 
+exports['getTermCheckSum'] = function(test) {
+    test.expect(1);
+    populator.getTermCheckSum("subjects-3824", function(err,ck) {
+        console.log("CHECKSUM = " + ck);
+        test.ok(ck[0] === "bf263c1f007eb2fb0cf07ab00d1a4abf9e0e7cfc");
+        test.done();
+    });
+}
 
-if (false)
+
+
+
+if (true)
 exports["harvest subjects"] = function(test) {
 
     test.expect(2);
@@ -216,7 +227,7 @@ exports["harvest subjects"] = function(test) {
         function(err,ret) {
         console.log("The Error = " + err);
         console.log("The Return = " + ret.length + " items");
-        test.ok(err === null);
+        test.ok(!err);
         test.ok(ret !== null);
         test.done();
     });
@@ -232,7 +243,7 @@ if (true)
             function(err,ret) {
                 console.log("The Error = " + err);
                 console.log("The Return = " + ret.length + " items");
-                test.ok(err === null);
+                test.ok(!err);
                 test.ok(ret !== null);
                 test.done();
             });
