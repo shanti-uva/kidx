@@ -86,7 +86,7 @@ exports.populateIndexByKMapId = function(kmapid, callback) {
     exports.getDocumentsByKMapId(kmapid,
             function (err, docs) {
                 sm.addDocs(docs,callback);
-                console.log("ADDED: " + JSON.stringify(docs,undefined,2));
+                // console.log("ADDED: " + JSON.stringify(docs,undefined,2));
             }
     )
 }
@@ -96,7 +96,7 @@ exports.populateIndexByKMapIdStale = function(kmapid, staletime, callback) {
         staletime,
         function (err, docs) {
             sm.addDocs(docs,callback);
-            console.log("ADDED: " + JSON.stringify(docs,undefined,2));
+            // console.log("ADDED: " + JSON.stringify(docs,undefined,2));
         }
     )
 }

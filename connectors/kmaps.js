@@ -141,7 +141,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
                             if (!pers) {
                                 pers = { code: null };
                             }
-                            console.log("ANCESTOR: " + pers.code + ":" + ancestorid + ":" + ancestor);
+                            // console.log("ANCESTOR: " + pers.code + ":" + ancestorid + ":" + ancestor);
 
                             addEntry(doc, 'ancestors_' + pers.code, ancestor);
                             addEntry(doc, 'ancestor_ids_' + pers.code, ancestorid);
@@ -155,7 +155,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
 
                     var pers = "default";
 
-                    console.log("ANCESTOR: " + pers+ ":" + ancestorid + ":" + ancestor);
+                    // console.log("ANCESTOR: " + pers+ ":" + ancestorid + ":" + ancestor);
 
                     addEntry(doc, 'ancestors_' + pers, ancestor);
                     addEntry(doc, 'ancestor_ids_' + pers, ancestorid);
@@ -220,7 +220,7 @@ exports.checkEtag = function (kmapuid, callback) {
 function addEntry(doc, field, data) {
     // first determine if the field exists
 
-    console.log("addEntry: " + field + " = " + JSON.stringify(data));
+    // console.log("addEntry: " + field + " = " + JSON.stringify(data));
 
 
     if (doc[field]) {
@@ -232,12 +232,12 @@ function addEntry(doc, field, data) {
 
         // push the new data into the array
         doc[field].push(data);
-        console.log("pushed: " + JSON.stringify(data));
+        // console.log("pushed: " + JSON.stringify(data));
 
     } else {
         // else treat it as a single value
         doc[field] = data;
-        console.log("inserted: " + JSON.stringify(data));
+        // console.log("inserted: " + JSON.stringify(data));
     }
 
 }
