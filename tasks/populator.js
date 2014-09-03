@@ -178,6 +178,7 @@ exports.populateTermIndex = function(host, master_callback) {
                     if (err) {
                         console.log("Error retrieving " + kid );
                     }
+                    console.log("Checking: (" + ord + ")");
 
                     if (doc !== null) {
 
