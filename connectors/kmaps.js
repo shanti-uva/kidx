@@ -180,7 +180,16 @@ exports.getKmapsDocument = function (kmapid, callback) {
                 console.log("Return was: " + raw.join('\n'));
                 callback(err, null);
             }
-        })
+        });
+        res.on('error', function (e) {
+            // General error, i.e.
+            //  - ECONNRESET - server closed the socket unexpectedly
+            //  - ECONNREFUSED - server did not listen
+            //  - HPE_INVALID_VERSION
+            //  - HPE_INVALID_STATUS
+            //  - ... (other HPE_* codes) - server returned garbage
+            console.log(e);
+        });
     }).end();
 }
 
