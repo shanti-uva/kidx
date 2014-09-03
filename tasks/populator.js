@@ -158,7 +158,7 @@ exports.populateTermIndex = function(host, master_callback) {
 
         async.mapLimit(list, CONCURRENCY, function iterator(kid,callback) {
 
-                console.log("host = " + host);
+//                console.log("host = " + host);
                 var ord = (_.indexOf(list, kid, false) + 1) + "/" + list.length;
                 console.log("kid = " + kid + " (" + ord  + ")");
 
@@ -169,7 +169,7 @@ exports.populateTermIndex = function(host, master_callback) {
                     kid = "places-" + kid;
                 }
 /////////////////////////////////////////////////////////
-                console.log("iterate: " + kid);
+//                 console.log("iterate: " + kid);
 
                 //  DO CHECKSUM or ETAGS check here
 
@@ -198,7 +198,7 @@ exports.populateTermIndex = function(host, master_callback) {
                                     callback(err,response);
                                 });
                             } else {
-                                console.log("skipping...  checksums match: " + ck + " === " + recorded_ck);
+                                // console.log("skipping...  checksums match: " + ck + " === " + recorded_ck);
                                 callback(null,{ "skipping": "checksums match" })
                             }
                         });

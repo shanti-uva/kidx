@@ -54,8 +54,8 @@ exports.getKmapsDocument = function (kmapid, callback) {
 //            'created_at': null,
 //            'updated_at': null
 //        };
-        console.log('STATUS: ' + res.statusCode);
-        console.log('HEADERS: ' + JSON.stringify(res.headers));
+//        console.log('STATUS: ' + res.statusCode);
+//        console.log('HEADERS: ' + JSON.stringify(res.headers));
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             raw.push(chunk);
@@ -115,7 +115,6 @@ exports.getKmapsDocument = function (kmapid, callback) {
                 });
 
                 // Descriptions
-
 
                 // Descriptions are a mystery.  Ask Andres!
 
