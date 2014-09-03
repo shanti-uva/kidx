@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cef4906-1aff-40b3-be14-ca98c680d1ad" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/populator.js" afterPath="$PROJECT_DIR$/tasks/populator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/connectors/kmaps.js" afterPath="$PROJECT_DIR$/connectors/kmaps.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="kidx.iws" />
@@ -29,21 +29,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="populator.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="populator.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tasks/populator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="41" selection-start="5650" selection-end="5650" vertical-scroll-proportion="0.63345194" vertical-offset="2522" max-vertical-offset="3555">
+            <state line="192" column="62" selection-start="6076" selection-end="6080" vertical-scroll-proportion="-3.5769231" vertical-offset="2787" max-vertical-offset="3555">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kmaps.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="kmaps.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/connectors/kmaps.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="173" column="18" selection-start="6306" selection-end="6306" vertical-scroll-proportion="-12.653846" vertical-offset="2266" max-vertical-offset="4500">
+            <state line="241" column="0" selection-start="7994" selection-end="7994" vertical-scroll-proportion="0.83208954" vertical-offset="3392" max-vertical-offset="4500">
               <folding>
-                <element signature="e#8906#9187#0" expanded="false" />
+                <element signature="e#8913#9194#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -161,8 +161,8 @@
         <option value="$PROJECT_DIR$/test/kmaps-test.js" />
         <option value="$PROJECT_DIR$/test/populator-test.js" />
         <option value="$PROJECT_DIR$/connectors/solrmanager.js" />
-        <option value="$PROJECT_DIR$/connectors/kmaps.js" />
         <option value="$PROJECT_DIR$/tasks/populator.js" />
+        <option value="$PROJECT_DIR$/connectors/kmaps.js" />
       </list>
     </option>
   </component>
@@ -569,7 +569,11 @@
       <created>1409755795910</created>
       <updated>1409755795910</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="improved logging">
+      <created>1409755990840</created>
+      <updated>1409755990840</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -639,7 +643,8 @@
     <MESSAGE value="Current state of development" />
     <MESSAGE value="Added &quot;tree&quot; to simplify querying" />
     <MESSAGE value="reduced chattiness of populator tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="reduced chattiness of populator tests" />
+    <MESSAGE value="improved logging" />
+    <option name="LAST_COMMIT_MESSAGE" value="improved logging" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -915,19 +920,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/connectors/kmaps.js">
+    <entry file="file://$PROJECT_DIR$/tasks/populator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="173" column="18" selection-start="6306" selection-end="6306" vertical-scroll-proportion="-12.653846" vertical-offset="2266" max-vertical-offset="4500">
-          <folding>
-            <element signature="e#8906#9187#0" expanded="false" />
-          </folding>
+        <state line="192" column="62" selection-start="6076" selection-end="6080" vertical-scroll-proportion="-3.5769231" vertical-offset="2787" max-vertical-offset="3555">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tasks/populator.js">
+    <entry file="file://$PROJECT_DIR$/connectors/kmaps.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="41" selection-start="5650" selection-end="5650" vertical-scroll-proportion="0.63345194" vertical-offset="2522" max-vertical-offset="3555">
-          <folding />
+        <state line="241" column="0" selection-start="7994" selection-end="7994" vertical-scroll-proportion="0.83208954" vertical-offset="3392" max-vertical-offset="4500">
+          <folding>
+            <element signature="e#8913#9194#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

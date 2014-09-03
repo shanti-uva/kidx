@@ -65,7 +65,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
             try {
                 var obj = JSON.parse(raw.join(''));
 
-                console.log("HOOOOOOOOOOOOOOPIE:" + JSON.stringify(obj, undefined, 2));
+                // console.log("HOOOOOOOOOOOOOOPIE:" + JSON.stringify(obj, undefined, 2));
 
                 if (res.headers.etag) {
                     doc.etag = res.headers.etag
@@ -202,8 +202,8 @@ exports.checkEtag = function (kmapuid, callback) {
 
     http.request(options, function (res) {
 
-        console.log("Getting HEAD: " + JSON.stringify(options));
-        console.log("HEADERS: " + JSON.stringify(res.headers));
+//        console.log("Getting HEAD: " + JSON.stringify(options));
+//        console.log("HEADERS: " + JSON.stringify(res.headers));
 
         if (res.headers.etag) {
             callback(null, res.headers.etag);
