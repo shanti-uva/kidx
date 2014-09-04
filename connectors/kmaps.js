@@ -175,7 +175,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
                 callback(null, doc);
             }
             catch (err) {
-//                throw err;
+                throw err;
                 console.log("Error: " + err);
                 console.log("Return was: " + raw.join('\n'));
                 callback(err, null);
@@ -208,10 +208,12 @@ exports.checkEtag = function (kmapuid, callback) {
         method: 'HEAD'
     };
 
+    console.log("trying " + JSON.stringify(options));
+
     http.request(options, function (res) {
 
-//        console.log("Getting HEAD: " + JSON.stringify(options));
-//        console.log("HEADERS: " + JSON.stringify(res.headers));
+        console.log("Getting HEAD: " + JSON.stringify(options));
+        console.log("HEADERS: " + JSON.stringify(res.headers));
 
         if (res.headers.etag) {
             callback(null, res.headers.etag);
@@ -219,7 +221,7 @@ exports.checkEtag = function (kmapuid, callback) {
             callback(null, null);
         }
 
-    })
+    }).end();
 
 
 }
