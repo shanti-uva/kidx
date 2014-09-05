@@ -64,7 +64,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
         res.on('end', function () {
             try {
                 var obj = JSON.parse(raw.join(''));
-                doc._version_i = 1;
+                doc._version_i = 2;
 
                 // console.log("HOOOOOOOOOOOOOOPIE:" + JSON.stringify(obj, undefined, 2));
 
