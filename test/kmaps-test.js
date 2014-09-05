@@ -41,7 +41,7 @@ if(true) {
 if (true) {
     exports["testGetKmapsTree"] = function(test) {
         test.expect(1);
-        km.getKmapsTree("dev-subjects.kmaps.virginia.edu", function(err,ret) {
+        km.getKmapsTree("subjects.kmaps.virginia.edu", function(err,ret) {
             console.log("ERR: " + err);
             console.log("RET: " + ret);
             test.ok(ret !== null);
@@ -54,7 +54,7 @@ if (true) {
 if (true) {
     exports["testGetKmapsList"] = function(test) {
         test.expect(2);
-        km.getKmapsList("dev-subjects.kmaps.virginia.edu", function(err,ret) {
+        km.getKmapsList("subjects.kmaps.virginia.edu", function(err,ret) {
             console.log("ERR: " + err);
             console.log("RET: " + ret);
             test.ok(ret !== null);
