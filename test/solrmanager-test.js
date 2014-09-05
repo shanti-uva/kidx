@@ -96,7 +96,7 @@ exports.testTermLastUpdated = function(test) {
 
 
 
-if (true)
+if (false)
 exports.addDocsTestSS = function (test) {
 
     const CONCURRENCY = 2;
@@ -123,7 +123,7 @@ exports.addDocsTestSS = function (test) {
 
 
 
-if (true)
+if (false)
 exports.addDocsTestMB = function (test) {
 
     const CONCURRENCY = 2;
@@ -144,7 +144,7 @@ exports.addDocsTestMB = function (test) {
 
 };
 
-if (true)
+if (false)
 exports.addDocsTest2 = function (test) {
 
     test.expect(2);
@@ -190,21 +190,20 @@ exports.checkIndexCounts = function (test) {
 
 }
 
-
-
+if (true)
+    exports['test Asset Etags'] = function (test) {
+        sm.getAssetEtag("mediabase-524", function (err, etag) {
+            console.log(etag);
+            test.done();
+        })
+    }
 
 
 if (true)
-
-exports['test Etags'] = function(test) {
-
-sm.getAssetEtag("mediabase-524",function(err,etag) {
-
-    console.log(etag);
-
-
-})
-
-
-}
+    exports['test Term Etags'] = function (test) {
+        sm.getTermEtag("subjects-2823", function (err, etag) {
+            console.log(etag);
+            test.done();
+        })
+    }
 

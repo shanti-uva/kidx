@@ -83,7 +83,7 @@ exports.termLastUpdated = function (uid, callback) {
 }
 
 exports.getAssetEtag = function (uid, callback) {
-    var query = asset_client.createQuery().q("uid:" + uid)
+    var query = asset_client.createQuery().q("uid:" + uid).fl("etag");
 
     asset_client.search(query, function (err, obj) {
         if (err) {
@@ -100,6 +100,26 @@ exports.getAssetEtag = function (uid, callback) {
         }
     });
 }
+
+exports.getTermEtag = function (kid, callback) {
+    var query =  term_client.createQuery().q("uid:" + kid).fl("etag");
+
+    term_client.search(query, function (err, obj) {
+        if (err) {
+            console.log("getTermEtag() Error:");
+            console.dir(err);
+        } else {
+            console.log("getTermEtag(): " + JSON.stringify(obj,undefined,2));
+            if (obj.response.numFound == 0) {
+                console.log("calling back null,null to " + callback);
+                callback(null, null);
+            } else if (obj.response.docs[0].etag) {
+                callback(null, obj.response.docs[0].etag);
+            }
+        }
+    });
+}
+
 
 exports.getTermCheckSum = function (uid, callback) {
     var query = term_client.createQuery().q("id:" + uid).fl("checksum");
