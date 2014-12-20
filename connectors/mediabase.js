@@ -114,35 +114,37 @@ exports.getDocument = function (docid, callback) {
 
     http.request(options,function (res) {
         var raw = [];
-        // console.log('STATUS: ' + res.statusCode);
-//        console.log('HEADERS: ' + JSON.stringify(res.headers));
+        console.log('STATUS: ' + res.statusCode);
+        console.log('HEADERS: ' + JSON.stringify(res.headers));
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
+            //console.log("DATA: " + chunk);
             raw.push(chunk);
         });
 
         res.on('end', function () {
             try {
                 var obj = JSON.parse(raw.join(''));
-                console.log(JSON.stringify(obj,undefined,2));
+                // console.log(JSON.stringify(obj,undefined,2));
+                var doc = obj.doc;
                 var kmapids = [];
-                if(obj.kmapid) obj.kmapid.forEach( function(x) {kmapids.push(
-                    "subjects-" + x)});
+                if(doc.kmapid) doc.kmapid.forEach( function(x) {kmapids.push(x)});
                 var pdidnodes = [];
-                if(obj.pdid) obj.pdid.forEach( function(x) {kmapids.push(
+                if(doc.pdid) doc.pdid.forEach( function(x) {kmapids.push(
                     "places-" + x)});
 
                 if (res.headers.etag) { doc.etag = res.headers.etag }
                 doc.kmapid = _.unique(kmapids);
-                doc.url = obj.url;
-                doc.bundle = obj.bundle;
-                // doc.description = obj.content;
-                doc.summary = obj.content;
-                doc.caption = obj.label;
-                doc.id = obj.entity_id;
-                doc.service = "mediabase";
-                doc.uid = doc.service + "-" + doc.id;
-                doc.thumbnail_url = obj.thumbnail_url;
+                //doc.url = obj.url;
+                //doc.bundle = obj.bundle;
+                //// doc.description = obj.content;
+                //doc.summary = obj.content;
+                //doc.caption = obj.label;
+                //doc.id = obj.id;
+                //doc.service = "mediabase";
+                //doc.uid = doc.service + "-" + doc.id;
+                //doc.thumbnail_url = obj.thumbnail_url;
+                console.dir(doc);
                 callback(null,doc);
             }
             catch(err) {

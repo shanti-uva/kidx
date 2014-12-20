@@ -2,11 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cef4906-1aff-40b3-be14-ca98c680d1ad" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/kmaps-test.js" afterPath="$PROJECT_DIR$/test/kmaps-test.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/connectors/kmaps.js" afterPath="$PROJECT_DIR$/connectors/kmaps.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/connectors/mediabase.js" afterPath="$PROJECT_DIR$/connectors/mediabase.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/populator-test.js" afterPath="$PROJECT_DIR$/test/populator-test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/populator.js" afterPath="$PROJECT_DIR$/tasks/populator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/connectors/solrmanager.js" afterPath="$PROJECT_DIR$/connectors/solrmanager.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="kidx.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,93 +37,104 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="populator.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="populator.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tasks/populator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="198" column="22" selection-start="6407" selection-end="6407" vertical-scroll-proportion="0.0" vertical-offset="1858" max-vertical-offset="3555">
+            <state vertical-scroll-proportion="0.10699002" vertical-offset="3015" max-vertical-offset="4740">
+              <caret line="206" column="0" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kmaps.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="kmaps.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/connectors/kmaps.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="0" selection-start="2031" selection-end="2031" vertical-scroll-proportion="0.68367344" vertical-offset="804" max-vertical-offset="4665">
-              <folding>
-                <element signature="e#9390#9671#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="-4.923077" vertical-offset="307" max-vertical-offset="6075">
+              <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="377" selection-end="377" vertical-scroll-proportion="-7.2" vertical-offset="0" max-vertical-offset="270">
+            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="270">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="essays.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/connectors/essays.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="4" selection-start="440" selection-end="440" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1095">
-              <folding />
-            </state>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mediabase.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="mediabase.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/connectors/mediabase.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="181" column="8" selection-start="5922" selection-end="5922" vertical-scroll-proportion="0.0" vertical-offset="2715" max-vertical-offset="3885">
+            <state vertical-scroll-proportion="0.0" vertical-offset="443" max-vertical-offset="3915">
+              <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kmaps-test.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="kmaps-test.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/kmaps-test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="0" selection-start="1852" selection-end="1852" vertical-scroll-proportion="-11.961538" vertical-offset="664" max-vertical-offset="1305">
+            <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1350">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="solrmanager.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="solrmanager.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/connectors/solrmanager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="130" column="31" selection-start="3952" selection-end="3952" vertical-scroll-proportion="0.0" vertical-offset="1782" max-vertical-offset="2625">
+            <state vertical-scroll-proportion="-21.5" vertical-offset="2336" max-vertical-offset="3060">
+              <caret line="193" column="46" selection-start-line="193" selection-start-column="46" selection-end-line="193" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="solrmanager-test.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/solrmanager-test.js">
+      <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/solr/test/common.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="203" column="14" selection-start="5489" selection-end="5500" vertical-scroll-proportion="0.0" vertical-offset="2823" max-vertical-offset="3225">
+            <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="570">
+              <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="essays-test.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/essays-test.js">
+      <file leaf-file-name="solr.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/solr-client/lib/solr.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="45" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="690">
+            <state vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="8700">
+              <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="populator-test.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="populator-test.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/populator-test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="224" column="21" selection-start="6360" selection-end="6377" vertical-scroll-proportion="0.0" vertical-offset="3290" max-vertical-offset="3840">
+            <state vertical-scroll-proportion="-9.115385" vertical-offset="2687" max-vertical-offset="4964">
+              <caret line="172" column="22" selection-start-line="172" selection-start-column="22" selection-end-line="172" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="types.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/nodeunit/lib/types.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="985" max-vertical-offset="2805">
+              <caret line="82" column="38" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -152,16 +171,16 @@
         <option value="$PROJECT_DIR$/connectors/kmapsconnector.js" />
         <option value="$PROJECT_DIR$/test/kmapsconnector-test.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/connectors/mediabase.js" />
         <option value="$PROJECT_DIR$/connectors/essays.js.php" />
         <option value="$PROJECT_DIR$/connectors/essays.js" />
         <option value="$PROJECT_DIR$/test/essays-test.js" />
         <option value="$PROJECT_DIR$/connectors/sharedshelf.js" />
-        <option value="$PROJECT_DIR$/test/populator-test.js" />
         <option value="$PROJECT_DIR$/test/solrmanager-test.js" />
+        <option value="$PROJECT_DIR$/test/kmaps-test.js" />
+        <option value="$PROJECT_DIR$/connectors/mediabase.js" />
         <option value="$PROJECT_DIR$/connectors/solrmanager.js" />
         <option value="$PROJECT_DIR$/tasks/populator.js" />
-        <option value="$PROJECT_DIR$/test/kmaps-test.js" />
+        <option value="$PROJECT_DIR$/test/populator-test.js" />
         <option value="$PROJECT_DIR$/connectors/kmaps.js" />
       </list>
     </option>
@@ -174,10 +193,10 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="22" />
-    <option name="y" value="22" />
+    <option name="x" value="12" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="829" />
+    <option name="height" value="873" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -193,7 +212,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -205,7 +224,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -216,20 +234,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="External Libraries" />
               <option name="myItemType" value="com.jetbrains.php.config.PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kidx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.jetbrains.php.config.PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Node.js v0.10.28 Core Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -334,52 +338,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="node_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeunit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kidx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kidx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeunit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kidx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kidx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="connectors" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -410,6 +375,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="937" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/ys2n/Code/node/kidx/tasks/populator.js" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -422,7 +388,6 @@
   </component>
   <component name="RunManager" selected="Nodeunit.populator-test">
     <configuration default="false" name="solr-test.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="/usr/local/bin/node" path-to-js-file="mediabase-test.js" working-dir="$PROJECT_DIR$/test">
-      <browser start="false" url="" with-js-debugger="false" />
       <RunnerSettings RunnerId="NodeJS.debug" />
       <RunnerSettings RunnerId="NodeJS.run" />
       <ConfigurationWrapper RunnerId="NodeJS.debug" />
@@ -430,19 +395,16 @@
       <method />
     </configuration>
     <configuration default="false" name="sharedshelf-test.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="/usr/local/bin/node" path-to-js-file="sharedshelf-test.js" working-dir="$PROJECT_DIR$/test">
-      <browser start="false" url="" with-js-debugger="false" />
       <RunnerSettings RunnerId="NodeJS.run" />
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
     </configuration>
     <configuration default="false" name="populator-test.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="/usr/local/bin/node" path-to-js-file="populator-test.js" working-dir="$PROJECT_DIR$/test">
-      <browser start="false" url="" with-js-debugger="false" />
       <RunnerSettings RunnerId="NodeJS.run" />
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
     </configuration>
     <configuration default="false" name="solrmanager-test.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="/usr/local/bin/node" path-to-js-file="solrmanager-test.js" working-dir="$PROJECT_DIR$/test">
-      <browser start="false" url="" with-js-debugger="false" />
       <RunnerSettings RunnerId="NodeJS.run" />
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
@@ -464,11 +426,22 @@
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
       <method />
     </configuration>
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
-      <browser start="false" url="" with-js-debugger="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <pass-parent-env-vars>false</pass-parent-env-vars>
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
@@ -480,7 +453,7 @@
       <method />
     </configuration>
     <configuration default="false" name="app.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="/usr/local/bin/node" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
-      <browser start="true" name="Chrome" url="http://localhost:3000/" with-js-debugger="true" />
+      <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" start="true" with-js-debugger="true" url="http://localhost:3000/" />
       <RunnerSettings RunnerId="NodeJS.run" />
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
@@ -506,7 +479,9 @@
       <setting name="testType" value="JS_FILE" />
       <setting name="jsFile" value="test/populator-test.js" />
       <RunnerSettings RunnerId="Nodeunit.run" />
+      <RunnerSettings RunnerId="debuggableProgram" />
       <ConfigurationWrapper RunnerId="Nodeunit.run" />
+      <ConfigurationWrapper RunnerId="debuggableProgram" />
       <method />
     </configuration>
     <configuration default="false" name="mediabase-test" type="NodeunitConfigurationType" factoryName="Nodeunit">
@@ -582,138 +557,170 @@
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  <component name="SvnConfiguration" myUseAcceleration="nothing">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="8cef4906-1aff-40b3-be14-ca98c680d1ad" name="Default" comment="" />
       <created>1403878191789</created>
+      <option name="number" value="Default" />
       <updated>1403878191789</updated>
     </task>
     <task id="LOCAL-00001" summary="module cleanup">
       <created>1407582372039</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
       <updated>1407582372039</updated>
     </task>
     <task id="LOCAL-00002" summary="working populator for kmaps terms -- intial draft">
       <created>1407582455620</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
       <updated>1407582455620</updated>
     </task>
     <task id="LOCAL-00003" summary="silenced some debugging&#10;">
       <created>1407583381159</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
       <updated>1407583381159</updated>
     </task>
     <task id="LOCAL-00004" summary="Current state of development">
       <created>1409163051014</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
       <updated>1409163051014</updated>
     </task>
     <task id="LOCAL-00005" summary="Added &quot;tree&quot; to simplify querying">
       <created>1409668692020</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
       <updated>1409668692021</updated>
     </task>
     <task id="LOCAL-00006" summary="Added &quot;tree&quot; to simplify querying">
       <created>1409755106303</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
       <updated>1409755106303</updated>
     </task>
     <task id="LOCAL-00007" summary="reduced chattiness of populator tests">
       <created>1409755795910</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
       <updated>1409755795910</updated>
     </task>
     <task id="LOCAL-00008" summary="improved logging">
       <created>1409755990840</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
       <updated>1409755990840</updated>
     </task>
     <task id="LOCAL-00009" summary="reduced logging">
       <created>1409764204585</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
       <updated>1409764204586</updated>
     </task>
     <task id="LOCAL-00010" summary="reduced logging">
       <created>1409765081017</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
       <updated>1409765081017</updated>
     </task>
     <task id="LOCAL-00011" summary="a little error handling in the kmaps request...  maybe">
       <created>1409767140653</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
       <updated>1409767140653</updated>
     </task>
     <task id="LOCAL-00012" summary="a little error handling in the kmaps request...  maybe">
       <created>1409842739665</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
       <updated>1409842739665</updated>
     </task>
     <task id="LOCAL-00013" summary="added etag handling">
       <created>1409941954164</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
       <updated>1409941954164</updated>
     </task>
     <task id="LOCAL-00014" summary="changes references to dev-subjects to subjects (prod)">
       <created>1409942255582</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
       <updated>1409942255582</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="added _version_i field to help signal reindexing.">
+      <created>1409942615327</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1409942615327</updated>
+    </task>
+    <task id="LOCAL-00016" summary="added _version_i field to help signal reindexing.">
+      <created>1409946829226</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1409946829226</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="22" y="22" width="1440" height="829" extended-state="0" />
+    <frame x="12" y="23" width="1440" height="873" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32770744" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3253521" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980132" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32760897" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3245033" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39701492" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36227545" sideWeight="0.17400882" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39630118" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49536425" sideWeight="0.17381974" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31616595" sideWeight="0.5027933" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32816902" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40057224" sideWeight="0.4944134" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49536425" sideWeight="0.82546496" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997006" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980132" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32760897" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3245033" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39630118" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49536425" sideWeight="0.17381974" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31616595" sideWeight="0.5027933" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32816902" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34334764" sideWeight="0.4944134" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49648383" sideWeight="0.8259912" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40057224" sideWeight="0.4944134" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997006" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-    </layout>
-    <layout-to-restore>
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32784432" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32722145" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39701492" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36227545" sideWeight="0.17400882" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31616595" sideWeight="0.5027933" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32985073" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32985073" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31616595" sideWeight="0.4944134" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997006" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49506348" sideWeight="0.8259912" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49536425" sideWeight="0.82546496" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
   </component>
@@ -736,157 +743,242 @@
     <MESSAGE value="a little error handling in the kmaps request...  maybe" />
     <MESSAGE value="added etag handling" />
     <MESSAGE value="changes references to dev-subjects to subjects (prod)" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes references to dev-subjects to subjects (prod)" />
+    <MESSAGE value="added _version_i field to help signal reindexing." />
+    <option name="LAST_COMMIT_MESSAGE" value="added _version_i field to help signal reindexing." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <default-breakpoints>
+        <breakpoint enabled="true" log-message="true" type="javascript-exception">
+          <properties />
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="8" />
     </breakpoint-manager>
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/test/solrmanager-test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2823" max-vertical-offset="3225">
+          <caret line="203" column="14" selection-start-line="203" selection-start-column="14" selection-end-line="203" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/essays-test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="690">
+          <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/populator-test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3290" max-vertical-offset="3840">
+          <caret line="224" column="21" selection-start-line="224" selection-start-column="21" selection-end-line="224" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/nodeunit/lib/types.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="38" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.0" vertical-offset="1230" max-vertical-offset="2955" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1230" max-vertical-offset="2955">
+          <caret line="82" column="38" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/nodeunit/deps/async.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="522" column="12" selection-start="15457" selection-end="15457" vertical-scroll-proportion="0.0" vertical-offset="7688" max-vertical-offset="9660" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="7688" max-vertical-offset="9660">
+          <caret line="522" column="12" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/lookup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="360" selection-end="360" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="405" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="405">
+          <caret line="20" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="286" column="14" selection-start="7035" selection-end="7035" vertical-scroll-proportion="0.0" vertical-offset="4140" max-vertical-offset="4905" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4140" max-vertical-offset="4905">
+          <caret line="286" column="14" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="30" selection-start="360" selection-end="360" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="645" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="645">
+          <caret line="16" column="30" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="25" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240">
+          <caret line="7" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="2" selection-start="118" selection-end="118" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="195" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="195">
+          <caret line="7" column="2" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="1" selection-start="268" selection-end="268" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="285" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="285">
+          <caret line="13" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="1" selection-start="268" selection-end="268" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="285" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="285">
+          <caret line="13" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="286" column="14" selection-start="7035" selection-end="7035" vertical-scroll-proportion="0.0" vertical-offset="4140" max-vertical-offset="4905" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4140" max-vertical-offset="4905">
+          <caret line="286" column="14" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/nodeunit/deps/async.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="522" column="12" selection-start="15457" selection-end="15457" vertical-scroll-proportion="0.20851688" vertical-offset="7688" max-vertical-offset="9660" />
+        <state vertical-scroll-proportion="0.20851688" vertical-offset="7688" max-vertical-offset="9660">
+          <caret line="522" column="12" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/solr-client/node_modules/request/node_modules/form-data/node_modules/combined-stream/node_modules/delayed-stream/test/common.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="134" selection-end="134" vertical-scroll-proportion="0.11013216" vertical-offset="0" max-vertical-offset="681" />
+        <state vertical-scroll-proportion="0.11013216" vertical-offset="0" max-vertical-offset="681">
+          <caret line="5" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/nodeunit/lib/core.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="236" column="15" selection-start="6178" selection-end="6178" vertical-scroll-proportion="0.0" vertical-offset="3256" max-vertical-offset="4755" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3256" max-vertical-offset="4755">
+          <caret line="236" column="15" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="36" selection-start="66" selection-end="66" vertical-scroll-proportion="0.07537688" vertical-offset="0" max-vertical-offset="398" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/WebIde70/extLibs/nodejs-v0.10.28-src/core-modules-sources/lib/_stream_readable.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="918" column="15" selection-start="25504" selection-end="25504" vertical-scroll-proportion="0.0" vertical-offset="13275" max-vertical-offset="13650" />
+        <state vertical-scroll-proportion="0.07537688" vertical-offset="0" max-vertical-offset="398">
+          <caret line="4" column="36" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="619" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="619">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/async/lib/async.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="230" column="22" selection-start="6399" selection-end="6399" vertical-scroll-proportion="0.0" vertical-offset="3253" max-vertical-offset="17160" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3253" max-vertical-offset="17160">
+          <caret line="230" column="22" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="8" selection-start="72" selection-end="72" vertical-scroll-proportion="0.13931888" vertical-offset="0" max-vertical-offset="323" />
+        <state vertical-scroll-proportion="0.13931888" vertical-offset="0" max-vertical-offset="323">
+          <caret line="5" column="8" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/lookup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="75" selection-end="360" vertical-scroll-proportion="0.0" vertical-offset="29" max-vertical-offset="375" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="29" max-vertical-offset="375">
+          <caret line="9" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/http-proxy/lib/http-proxy/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="0" selection-start="2987" selection-end="2987" vertical-scroll-proportion="0.0" vertical-offset="1588" max-vertical-offset="2550" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1588" max-vertical-offset="2550">
+          <caret line="113" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/eventsource.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9375" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9375">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/stream.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="72" selection-start="923" selection-end="923" vertical-scroll-proportion="0.0" vertical-offset="208" max-vertical-offset="825" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="208" max-vertical-offset="825">
+          <caret line="37" column="72" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="16" selection-start="77" selection-end="78" vertical-scroll-proportion="-1.2" vertical-offset="0" max-vertical-offset="735" />
+        <state vertical-scroll-proportion="-1.2" vertical-offset="0" max-vertical-offset="735">
+          <caret line="4" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="3" selection-start="2415" selection-end="2415" vertical-scroll-proportion="0.0" vertical-offset="985" max-vertical-offset="1350" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="985" max-vertical-offset="1350">
+          <caret line="84" column="3" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="http://localhost:3001/">
@@ -896,128 +988,149 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/.bin/coveralls">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="18" selection-start="366" selection-end="366" vertical-scroll-proportion="0.59859157" vertical-offset="0" max-vertical-offset="426" />
+        <state vertical-scroll-proportion="0.59859157" vertical-offset="0" max-vertical-offset="426">
+          <caret line="17" column="18" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/sharedshelf-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="30" selection-start="902" selection-end="927" vertical-scroll-proportion="0.0" vertical-offset="266" max-vertical-offset="2340" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="266" max-vertical-offset="2340">
+          <caret line="30" column="30" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="4" selection-start="379" selection-end="379" vertical-scroll-proportion="0.0" vertical-offset="154" max-vertical-offset="555" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/WebIde70/extLibs/nodejs-v0.10.28-src/core-modules-sources/lib/http.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1842" column="9" selection-start="52796" selection-end="52796" vertical-scroll-proportion="0.0" vertical-offset="27224" max-vertical-offset="32310" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/WebIde70/extLibs/nodejs-v0.10.28-src/core-modules-sources/lib/_stream_transform.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3165" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/WebIde70/extLibs/nodejs-v0.10.28-src/core-modules-sources/lib/events.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="19" selection-start="3865" selection-end="3865" vertical-scroll-proportion="0.0" vertical-offset="1334" max-vertical-offset="4245" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/WebIde70/extLibs/nodejs-v0.10.28-src/core-modules-sources/lib/module.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="363" column="16" selection-start="10253" selection-end="10253" vertical-scroll-proportion="0.5765472" vertical-offset="4983" max-vertical-offset="7860" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="154" max-vertical-offset="555">
+          <caret line="19" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/connectors/sharedshelf.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="0" selection-start="2197" selection-end="2197" vertical-scroll-proportion="0.0" vertical-offset="517" max-vertical-offset="3405" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/solr-client/lib/solr.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="396" column="17" selection-start="12324" selection-end="12324" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="8700" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="517" max-vertical-offset="3405">
+          <caret line="71" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/essays-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="45" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="690">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="690">
+          <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/mediabase-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="9" selection-start="1488" selection-end="1493" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="2715" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/connectors/mediabase.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="181" column="8" selection-start="5922" selection-end="5922" vertical-scroll-proportion="0.0" vertical-offset="2438" max-vertical-offset="3885">
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="2715">
+          <caret line="51" column="9" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/nodeunit/lib/types.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="38" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.0" vertical-offset="993" max-vertical-offset="2805" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/connectors/essays.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="4" selection-start="440" selection-end="440" vertical-scroll-proportion="0.0" vertical-offset="97" max-vertical-offset="1095">
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1095">
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/solrmanager-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="203" column="14" selection-start="5489" selection-end="5500" vertical-scroll-proportion="0.0" vertical-offset="2823" max-vertical-offset="3225">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/populator-test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="224" column="21" selection-start="6360" selection-end="6377" vertical-scroll-proportion="0.0" vertical-offset="3290" max-vertical-offset="3840">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tasks/populator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="22" selection-start="6407" selection-end="6407" vertical-scroll-proportion="0.0" vertical-offset="1858" max-vertical-offset="3555">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/connectors/solrmanager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="31" selection-start="3952" selection-end="3952" vertical-scroll-proportion="0.0" vertical-offset="1782" max-vertical-offset="2625">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2823" max-vertical-offset="3225">
+          <caret line="203" column="14" selection-start-line="203" selection-start-column="14" selection-end-line="203" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="377" selection-end="377" vertical-scroll-proportion="-7.2" vertical-offset="0" max-vertical-offset="270">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="270">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/coveralls/node_modules/js-yaml/node_modules/argparse/node_modules/underscore.string/test/test_underscore/vendor/qunit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3313253" vertical-offset="9295" max-vertical-offset="29745">
+          <caret line="627" column="40" selection-start-line="627" selection-start-column="40" selection-end-line="627" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/nodeunit/lib/types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="985" max-vertical-offset="2805">
+          <caret line="82" column="38" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/solr/test/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/kmaps-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="1852" selection-end="1852" vertical-scroll-proportion="-11.961538" vertical-offset="664" max-vertical-offset="1305">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/solr-client/lib/solr.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="8700">
+          <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/connectors/solrmanager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.5" vertical-offset="2336" max-vertical-offset="3060">
+          <caret line="193" column="46" selection-start-line="193" selection-start-column="46" selection-end-line="193" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/populator-test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.115385" vertical-offset="2687" max-vertical-offset="4964">
+          <caret line="172" column="22" selection-start-line="172" selection-start-column="22" selection-end-line="172" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/connectors/mediabase.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="443" max-vertical-offset="3915">
+          <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/connectors/kmaps.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="0" selection-start="2031" selection-end="2031" vertical-scroll-proportion="0.68367344" vertical-offset="804" max-vertical-offset="4665">
-          <folding>
-            <element signature="e#9390#9671#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="-4.923077" vertical-offset="307" max-vertical-offset="6075">
+          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tasks/populator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10699002" vertical-offset="3015" max-vertical-offset="4740">
+          <caret line="206" column="0" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

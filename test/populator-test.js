@@ -143,11 +143,31 @@ kmapid_fixtures.forEach(
     }
 )
 
+
+if (true)
+exports["eliminateOldEntries"] = function(test) {
+    var mb = require("../connectors/mediabase");
+    test.expect(1);
+    populator.updateEntries("mediabase_drupal-dev_shanti_virginia_edu", function(err,ret) {
+        console.log("Err = " + err);
+        console.log("Ret = " + ret);
+        test.ok(true);
+        test.done();
+    })
+
+
+}
+
+
+
+
+
+
 if(false)
 exports["rangePopulateMediaBase"] = function(test) {
     var mb = require("../connectors/mediabase");
     test.expect(1);
-    populator.rangePopulateIndexByService(mb,1,2160,function(err,ret) {
+    populator.rangePopulateIndexByService(mb,1 ,2600,function(err,ret) {
         console.log("Err = " + err);
         console.log("Ret = " + ret);
         test.ok(true);
@@ -210,38 +230,54 @@ exports['getTermCheckSum'] = function(test) {
     test.expect(1);
     populator.getTermCheckSum("subjects-3824", function(err,ck) {
         console.log("CHECKSUM = " + ck);
-        test.ok(ck[0] === "bf263c1f007eb2fb0cf07ab00d1a4abf9e0e7cfc");
+        test.ok(ck[0] === "378ff9672cd89d9a6b4f4a3bc19257dd61447c34");
         test.done();
     });
 }
 
-
-
-
-if (true)
-exports["harvest subjects"] = function(test) {
-
-    test.expect(2);
-    populator.populateTermIndex(
-        "subjects.kmaps.virginia.edu",
-        function(err,ret) {
-        console.log("The Error = " + err);
-        console.log("The Return = " + ret.length + " items");
-        test.ok(!err);
-        test.ok(ret !== null);
+exports['getTermCheckSum-2'] = function(test) {
+    test.expect(1);
+    populator.getTermCheckSum("places-5229", function(err,ck) {
+        console.log("CHECKSUM = " + ck);
+        test.ok(ck[0] === "2b38c06dc6d442606494f50f087f8a0374868c2e");
         test.done();
     });
-
 }
 
 if (true)
     exports["harvest places"] = function(test) {
+
+        process.on('uncaughtException', function (er) {
+            console.trace("UnCaught exception!");
+            console.error(er.stack)
+            process.exit(1)
+        })
 
         test.expect(2);
         populator.populateTermIndex(
             "places.kmaps.virginia.edu",
             function(err,ret) {
                 console.log("The Error = " + err);
+                console.log("The Return = " + ret.length + " items");
+                test.ok(!err);
+                test.ok(ret !== null);
+                test.done();
+            });
+
+    }
+
+
+if (true)
+    exports["harvest subjects"] = function(test) {
+
+        test.expect(2);
+        populator.populateTermIndex(
+            "subjects.kmaps.virginia.edu",
+            function(err,ret) {
+                console.log("The Error = " + err);
+                if (err) {
+                    console.log("The stack = " + err.stack);
+                }
                 console.log("The Return = " + ret.length + " items");
                 test.ok(!err);
                 test.ok(ret !== null);

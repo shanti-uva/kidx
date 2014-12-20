@@ -14,6 +14,7 @@ var ss = require("../connectors/sharedshelf");
 var km = require("../connectors/kmaps");
 var async = require("async");
 var sm = require("../connectors/solrmanager");
+var domain = require("domain");
 var _ = require("underscore");
 var crypto = require('crypto');
 
@@ -146,72 +147,124 @@ exports.rangePopulateIndexByService = function (serviceConnector, start, finish,
 }
 
 exports.populateTermIndex = function(host, master_callback) {
-    const LIST_LIMIT = 0; // set to non-zero for testing ONLY
-    const CONCURRENCY = 10;
-    km.getKmapsList(host,function(err,list){
-        console.log("Err = " + err);
+    const LIST_LIMIT = 10; // set to non-zero for testing ONLY
+    const CONCURRENCY = 5;
 
-        // truncating filter useful for testing.
-        if (LIST_LIMIT) {
-            list = _.first(list,LIST_LIMIT);
-        }
-
-        async.mapLimit(list, CONCURRENCY, function iterator(kid,callback) {
-
-//                console.log("host = " + host);
-                var ord = (_.indexOf(list, kid, false) + 1) + "/" + list.length;
-                console.log("kid = " + kid + " (" + ord  + ")");
-
-/////  ARGH THIS IS JUST WRONG!  REFACTOR THIS SUCKER! /////////
-                if (host.indexOf("subjects") > -1) {
-                    kid = "subjects-" + kid;
-                } else {
-                    kid = "places-" + kid;
-                }
-/////////////////////////////////////////////////////////
-//                 console.log("iterate: " + kid);
-
-                //  DO CHECKSUM or ETAGS check here
-
-                km.getKmapsDocument(kid,function(err, doc){
-
-                    if (err) {
-                        console.log("Error retrieving " + kid );
-                    }
-                    console.log("Checking: (" + ord + ")");
-
-                    if (doc !== null) {
-
-                        var ck = doc.checksum;
-                        sm.getTermCheckSum(doc.id,function(err,recorded_ck){
-                            // ignore err
-
-                            console.log("CHECKSUMS: " + ck + " ::: " + recorded_ck);
-
-                            if (ck != recorded_ck) {
-
-                                console.log("writing: " + JSON.stringify(doc, undefined, 2));
-                                console.log("writing: (" + ord + ")");
-
-                                sm.addTerms([ doc ],function(err,response) {
-                                    console.dir(response);
-                                    callback(err,response);
-                                });
-                            } else {
-                                // console.log("skipping...  checksums match: " + ck + " === " + recorded_ck);
-                                callback(null,{ "skipping": "checksums match" })
-                            }
-                        });
-                    }
-                });
-            },
-            function final(err,results) {
-                console.log("final: done!");
-                master_callback(err,results);
-            });
+    var dom = domain.create();
+    dom.on('error', function(er) {
+        console.trace("UnCaught exception!");
+        console.error(er.stack);
     });
 
+    dom.run(
 
+
+        function() {
+        km.getKmapsList(host, function (err, list) {
+            console.log("Err = " + err);
+            list = list.reverse();
+
+            const JUMP = 0;
+
+            // truncating filter useful for testing.
+            if (LIST_LIMIT) {
+                list = _.first(list, LIST_LIMIT);
+            }
+
+
+            if (JUMP) {
+                list = _.last(list, (list.length - JUMP));
+            }
+
+
+            async.mapLimit(list, CONCURRENCY, function iterator(kid, callback) {
+
+//                console.log("host = " + host);
+                    var ord = (_.indexOf(list, kid, false) + 1 + JUMP) + "/" + (list.length + JUMP);
+                    console.log("======= (" + ord + ") kid = " + kid  + " ========");
+
+/////  ARGH THIS IS JUST WRONG!  REFACTOR THIS SUCKER! /////////
+                    if (host.indexOf("subjects") > -1) {
+                        kid = "subjects-" + kid;
+                    } else {
+                        kid = "places-" + kid;
+                    }
+/////////////////////////////////////////////////////////
+//                 console.log("iterate: " + kid);
+                    //  DO CHECKSUM or ETAGS check here
+
+
+                    km.getKmapsDocument(kid, function (err, doc) {
+                        if (err) {
+                            console.log("Error retrieving " + kid);
+                            callback(null, {"ignored error": err});
+                        }
+                        console.log("Checking: (" + ord + ")");
+                        if (doc !== null) {
+
+                            //console.error("HERES THE DOC " + ord + ":" + JSON.stringify(doc,undefined, 2));
+
+
+                            var ck = doc.checksum;
+                            var etag = doc.etag;
+                            var version = + doc._version_i;
+
+                            console.log("Checking ETAG (" + ord + ")");
+                            sm.getTermEtag(doc.id, function (err, recorded_etag) {
+
+                                if (err) {
+                                    console.trace("Calling back err from getKmapsDocument/getTermsEtag callback.");
+                                    callback(err);
+                                    return;
+                                }
+
+                                console.log("    ETAG: " + etag);
+                                console.log("Rec ETAG: " + recorded_etag.etag);
+                                console.log("VERSION: " + km.getVersion());
+                                console.log("REC VERSION: " + recorded_etag.version);
+
+                                if (etag !== recorded_etag.etag || recorded_etag.version !== km.getVersion()) {
+
+                                    console.log("Checking TermCheckSum (" + ord + ")");
+                                    sm.getTermCheckSum(doc.id, function (err, recorded_ck) {
+
+                                        if (err) {
+
+                                            console.trace("Calling back err from getKmapsDocument/getTermsEtag/getTermCheckSum callback.");
+                                            callback(err);
+                                            return;
+                                        };
+
+                                        console.log("CHECKSUMS: " + ck + " ::: " + recorded_ck);
+                                        if (ck != recorded_ck) {
+                                            console.log("writing: " + JSON.stringify(doc, undefined, 2));
+                                            console.log("writing: (" + ord + ")");
+                                            sm.addTerms([doc], function (err, response) {
+                                                if (err) {
+                                                    console.trace("Calling back err from getKmapsDocument/getTermsEtag/getTermCheckSum/sm.addTerms callback.");
+                                                }
+                                                // console.dir(response);
+                                                callback(err, response);
+                                            });
+                                        } else {
+                                            // console.log("skipping...  checksums match: " + ck + " === " + recorded_ck);
+                                            callback(null, {"skipping": "checksums match"})
+                                        }
+                                    });
+                                } else {
+                                    callback(null, {"skipping": "ETAGs match"});
+                                }
+                            });
+                        }
+                    });
+                    //
+                },
+                function final(err, results) {
+                    console.log("final: done!");
+                    master_callback(err, results);
+                });
+        });
+    });
 
     // + differentiate subject and places in the index!
     // + Use updated_at for freshness.
@@ -224,6 +277,32 @@ exports.populateTermIndex = function(host, master_callback) {
 
 }
 
+exports.updateEntries = function(serviceConnector, master_callback) {
+
+    sm.getAssetDocs(serviceConnector, function(err, docs) {
+
+        console.error("serviceConnector = " + serviceConnector);
+        console.error("ERRRRRRRR: " + err);
+        console.error("DOCS: " + docs.length);
+
+        serviceConnector
+
+
+        docs.forEach( function(x) {
+            console.dir (x);
+        })
+
+
+        master_callback(null, { nothing: "doing"});
+
+    });
+
+
+
+
+
+
+}
 
 exports.getTermCheckSum = function(id,callback) {
     // delegate

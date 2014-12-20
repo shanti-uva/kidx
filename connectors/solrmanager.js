@@ -3,6 +3,7 @@
  */
 
 var solr = require('solr-client');
+var async = require('async');
 
 var asset_index_options = {
     'host': 'kidx.shanti.virginia.edu',
@@ -102,45 +103,62 @@ exports.getAssetEtag = function (uid, callback) {
 }
 
 exports.getTermEtag = function (kid, callback) {
-    var query =  term_client.createQuery().q("uid:" + kid).fl("etag");
+    const RETRY_LIMIT = 3;
+    var query =  term_client.createQuery().q("uid:" + kid).fl("etag,_version_i");
 
-    term_client.search(query, function (err, obj) {
-        if (err) {
-            console.log("getTermEtag() Error:");
-            console.dir(err);
-        } else {
-            console.log("getTermEtag(): " + JSON.stringify(obj,undefined,2));
-            if (obj.response.numFound == 0) {
-                console.log("calling back null,null to " + callback);
-                callback(null, null);
-            } else if (obj.response.docs[0].etag) {
-                callback(null, obj.response.docs[0].etag);
+
+    //   SOMETHING IS WRONG HERE...   WHAT IS IT?
+    //   WHAT CONSTITUTES SUCCESS, and WHAT CONSTITUTES FAILURE HERE?
+
+    async.retry(RETRY_LIMIT, function (callback, results) {
+        console.log("Trying... "  + "kid = " + kid);
+        term_client.search(query, function (err, obj) {
+            if (err) {
+                console.log("getTermEtag() Error for kid = " + kid + ":");
+                console.dir(err);
+                callback(err);
+            } else {
+                // console.log("getTermEtag(): " + JSON.stringify(obj,undefined,2));
+                if (obj.response.numFound == 0) {
+                    console.log("calling back null,null to " + callback);
+                    callback(null, null);
+                } else if (obj.response.docs[0].etag) {
+                    callback(null, {'etag':obj.response.docs[0].etag, 'version':obj.response.docs[0]._version_i });
+                }
             }
-        }
+        });
+    },  function (err, result) {
+        callback(err,result);
     });
 }
 
 
 exports.getTermCheckSum = function (uid, callback) {
-    var query = term_client.createQuery().q("id:" + uid).fl("checksum");
+    try {
+        var query = term_client.createQuery().q("id:" + uid).fl("checksum");
 
-    term_client.search(query, function (err, obj) {
-        if (err) {
-            console.log("getTermCheckSum() Error:");
-            console.dir(err);
-            callback(err,null);
-        } else {
-            // console.log("getTermCheckSum(): " + JSON.stringify(obj,undefined,2));
-            if (obj.response.numFound == 0) {
-                console.log("calling back null,null to " + callback);
-                callback(null, null);
-            } else if (obj.response.docs[0].checksum) {
-                callback(null, obj.response.docs[0].checksum);
+
+        term_client.search(query, function (err, obj) {
+            if (err) {
+                console.log("getTermCheckSum() Error:");
+                console.dir(err);
+                callback(err, null);
             } else {
-                callback(null,null);
+                // console.log("getTermCheckSum(): " + JSON.stringify(obj,undefined,2));
+                if (obj.response.numFound == 0) {
+                    console.log("calling back null,null to " + callback);
+                    callback(null, null);
+                } else if (obj.response.docs[0].checksum) {
+                    callback(null, obj.response.docs[0].checksum);
+                } else {
+                    callback(null, null);
+                }
             }
-        }
-    });
+        });
+    } catch (e) {
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ERROR >>>>>>>>>>>>>>>>>>>>>");
+        callback(e);
+    }
 }
 
 
@@ -163,7 +181,18 @@ exports.addTerms = function (terms, callback) {
     });
 }
 
-
-
-
+exports.getAssetDocs = function (service, callback) {
+    console.error("service = " + service);
+    var query = asset_client.createQuery().q({"service":service}).fl("id,service").rows(30000);
+    asset_client.search(query, function (err, obj) {
+        if (err) {
+            console.log("getAssetDocs() Error:");
+            console.dir(err);
+            callback(err);
+        } else {
+            console.log("getAssetDocs(): " + JSON.stringify(obj,undefined,2));
+            callback(null, obj.response.docs);
+        }
+    });
+}
 

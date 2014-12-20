@@ -4,6 +4,9 @@
 
 
 var kmapid_fixtures = [
+    { id: "places-5229", count: 99 },
+    { id: "places-1080", count: 99 },
+    { id: "places-15909", count: 99 },
     { id: "places-2", count: 1 },
     { id: "places-1", count: 2},
     { id: "places-15400" , count: 93 },

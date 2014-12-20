@@ -2,10 +2,14 @@
  * Created by ys2n on 8/7/14.
  */
 
+const VERSION = 8;
 var _ = require('underscore');
 var traverse = require('traverse');
 var http = require('http');
 var crypto = require('crypto');
+var util = require('util');
+var domain = require('domain');
+// var async = require('async');
 
 function grokKClass(kmapid) {
     var parts = kmapid.split('-');
@@ -26,7 +30,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
     var kid = __ret.kid;
 
     var options = {
-        host: kclass + '.kmaps.virginia.edu',
+        host: kclass + '.kmapsc.virginia.edu',
         port: 80,
         path: '/features/' + kid + ".json",
         method: 'GET'
@@ -36,162 +40,220 @@ exports.getKmapsDocument = function (kmapid, callback) {
 
     console.log("Attempting to contact: " + JSON.stringify(options));
 
-    http.request(options,function (res) {
-        var raw = [];
+    var dom = domain.create();
 
-        var doc = {};
-//        var doc = {
-//            'feature_types': [], // feature_type @title @id
-//            'feature_type_ids': [],
-//            'names': [], // name @language @view @name @writing_system
-//            'captions': [], // caption @language @content
-//            'summaries': [], // summary/content summary/language
-//            'descriptions': [], // description  Ask Andres!!
-//            'illustrations': [], // picture @url @type
-//            'interactive_map_url': null,
-//            'kmz_url': null,
-//            'header': null,
-//            'created_at': null,
-//            'updated_at': null
-//        };
-//        console.log('STATUS: ' + res.statusCode);
-//        console.log('HEADERS: ' + JSON.stringify(res.headers));
-        res.setEncoding('utf8');
-        res.on('data', function (chunk) {
-            raw.push(chunk);
-        });
+    dom.on('error', function(er) {
+        console.trace("UnCaught exception!");
+        console.error(er.stack);
+        callback(er);
+    });
 
-        res.on('end', function () {
-            try {
-                var obj = JSON.parse(raw.join(''));
-                doc._version_i = 2;
+    dom.run( function () {
+        try {
+            http.request(options, function (res) {
+                var raw = [];
 
-                // console.log("HOOOOOOOOOOOOOOPIE:" + JSON.stringify(obj, undefined, 2));
+                var doc = {};
 
-                if (res.headers.etag) {
-                    doc.etag = res.headers.etag
-                }
-                // ID should be unique
-                doc.id = kclass + "-" + obj.feature.id;
-
-                // Header
-                doc.header = obj.feature.header;
-
-                doc.tree = kclass;
-
-                // Feature_types
-                if (obj.feature.feature_types)
-                    obj.feature.feature_types.forEach(function (x) {
-                        addEntry(doc, 'feature_types', x.title);
-                        // doc.feature_types.push(x.title);
-                        addEntry(doc, 'feature_type_ids', x.id)
-                        // doc.feature_type_ids.push(x.id);
-                    });
-
-                // Names:  these will be joined in the index
-                // console.log(JSON.stringify(obj.feature.names, undefined, 2))
-
-
-                // NEED TO USE THE names INTERFACE INSTEAD for completeness
-                obj.feature.names.forEach(function (x) {
-                    var fieldname = "name_" + x.language + "_" + x.view + "_" + x.writing_system + ((x.orthographic_system) ? "_" + x.orthographic_system : "");
-                    doc[fieldname] = x.name;
+                //console.log('STATUS: ' + res.statusCode);
+                //console.log('HEADERS: ' + JSON.stringify(res.headers));
+                res.setEncoding('utf8');
+                res.on('data', function (chunk) {
+                    raw.push(chunk);
                 });
 
+                res.on('end', function () {
+                    var abbreviate = function (str) {
+                        var ab = "";
+                        var parts = str.match(/(\b[A-z]{1,3})/g);
+                        ab = parts.join("_").toLowerCase();
+                        return ab;
+                    }
+                    try {
+                        var obj = JSON.parse(raw.join(''));
+                        doc._version_i = VERSION;
 
-                // Captions
-                // console.log("CAPTIONS:" + JSON.stringify(obj.feature.captions,undefined,2))
-                obj.feature.captions.forEach(function (x) {
-                    var lang = x.language;
-                    var content = x.content;
-                    doc['caption_' + lang] = content;
+                        // console.log("HOOOOOOOOOOOOOOPIE:" + JSON.stringify(obj, undefined, 2));
+
+                        if (res.headers.etag) {
+                            doc.etag = res.headers.etag
+                        }
+                        // ID should be unique
+                        doc.id = kclass + "-" + obj.feature.id;
+
+                        // Header
+                        doc.header = obj.feature.header;
+
+                        doc.tree = kclass;
+
+                        // Feature_types
+                        if (obj.feature.feature_types)
+                            obj.feature.feature_types.forEach(function (x) {
+                                addEntry(doc, 'feature_types', x.title);
+                                // doc.feature_types.push(x.title);
+                                addEntry(doc, 'feature_type_ids', x.id)
+                                // doc.feature_type_ids.push(x.id);
+                            });
+
+                        // Names:  these will be joined in the index
+                        // console.log(JSON.stringify(obj.feature.names, undefined, 2))
+
+
+                        // NEED TO USE THE names INTERFACE INSTEAD for completeness
+                        obj.feature.names.forEach(function (x) {
+                            var fieldname = "name_" + x.language + "_" + x.view + "_" + x.writing_system + ((x.orthographic_system) ? "_" + x.orthographic_system : "");
+                            doc[fieldname] = x.name;
+                        });
+
+                        if (obj.feature.captions) {
+                            // Captions
+                            // console.log("CAPTIONS:" + JSON.stringify(obj.feature.captions,undefined,2))
+                            obj.feature.captions.forEach(function (x) {
+                                var lang = x.language;
+                                var content = x.content;
+                                doc['caption_' + lang] = content;
+                            });
+                        }
+
+                        if (obj.feature.nested_captions) {
+                            obj.feature.nested_captions.forEach(function (x) {
+                                var lang = x.language;
+                                var content = x.content;
+                                doc['caption_' + lang] = content;
+                            });
+                        }
+
+                        // Summaries
+                        // console.log(JSON.stringify(obj.feature.summaries, undefined, 2));
+                        obj.feature.summaries.forEach(function (x) {
+                            var lang = x.language;
+                            var content = x.content;
+                            doc['summary_' + lang] = content;
+                        });
+
+                        // Descriptions
+
+                        // Descriptions are a mystery.  Ask Andres!
+
+                        // console.log(JSON.stringify(obj.feature.illustrations, undefined, 2));
+                        obj.feature.illustrations.forEach(function (x) {
+                            var url = x.url;
+                            var type = x.type;
+
+                            addEntry(doc, 'illustration_' + type + '_url', url);
+
+                            // doc['illustration_' + type + '_url']=url;
+                        });
+
+                        // ANCESTORS!  by PERSPECTIVE
+                        if (obj.feature.perspectives) {
+                            obj.feature.perspectives.forEach(function (pers) {
+                                pers.ancestors.forEach(function (x) {
+                                    var ancestor = x.header;
+                                    var ancestorid = x.id;
+
+                                    if (!pers) {
+                                        pers = {code: null};
+                                    }
+                                    // console.log("ANCESTOR: " + pers.code + ":" + ancestorid + ":" + ancestor);
+
+                                    addEntry(doc, 'ancestors_' + pers.code, ancestor);
+                                    addEntry(doc, 'ancestor_ids_' + pers.code, ancestorid);
+
+                                })
+                            });
+                        } else {
+                            obj.feature.ancestors.forEach(function (x) {
+                                var ancestor = x.header;
+                                var ancestorid = x.id;
+
+                                var pers = "default";
+
+                                // console.log("ANCESTOR: " + pers+ ":" + ancestorid + ":" + ancestor);
+
+                                addEntry(doc, 'ancestors_' + pers, ancestor);
+                                addEntry(doc, 'ancestor_ids_' + pers, ancestorid);
+
+                            });
+                        }
+
+                        doc.interactive_map_url = obj.feature.interactive_map_url;
+                        doc.kmz_url = obj.feature.kmz_url;
+                        doc.created_at = obj.feature.created_at;
+                        doc.updated_at = obj.feature.updated_at;
+                        doc.has_shapes = Boolean(obj.feature.has_shapes);
+                        doc.has_altitudes = Boolean(obj.feature.has_altitudes);
+                        if (obj.feature.closest_fid_with_shapes)
+                            doc.closest_fid_with_shapes = obj.feature.closest_fid_with_shapes;
+
+                        // collect from the names api (napi)
+                        var napi_options = JSON.parse(JSON.stringify(options));
+                        napi_options.path = '/features/' + kid + "/names.json",
+                            http.request(napi_options, function (napi_res) {
+                                var raw2 = [];
+                                napi_res.setEncoding('utf8');
+                                napi_res.on('data', function (chunk2) {
+                                    raw2.push(chunk2);
+                                });
+
+                                napi_res.on('end', function () {
+                                    var napi_obj = JSON.parse(raw2.join(''));
+                                    // console.log(util.inspect(napi_obj, false, null));
+
+                                    // console.log("TRAVERSING: " + JSON.stringify(napi_obj));
+                                    var names = traverse(napi_obj).reduce(function (acc, x) {
+                                        if (x && x.name && typeof x !== 'string') {
+                                            //console.log("============");
+                                            //console.dir(x);
+                                            //console.log("============");
+                                            var joined = "name_";
+                                            if (x.language) joined += abbreviate(x.language);
+                                            if (x.writing_system) joined += "_" + abbreviate(x.writing_system);
+                                            if (x.relationship) joined += "_" + abbreviate(x.relationship);
+                                            acc[joined] = x.name;
+                                        }
+                                        return acc;
+                                    }, {});
+                                    //console.dir(names);
+                                    _.extend(doc, names);
+                                    doc.checksum = checksum(doc);
+                                    callback(null, doc);
+                                });
+
+                                napi_res.on('error', function (e) {
+                                    conosle.log("BOOFOO");
+                                    console.log(e);
+                                });
+
+                            }).end();
+                    }
+                    catch (err) {
+                        console.log("Error: " + err);
+                        console.log("Return was: " + raw.join('\n'));
+                        callback(null, null);
+                    }
                 });
 
-                // Summaries
-                // console.log(JSON.stringify(obj.feature.summaries, undefined, 2));
-                obj.feature.summaries.forEach(function (x) {
-                    var lang = x.language;
-                    var content = x.content;
-                    doc['summary_' + lang] = content;
+                res.on('error', function (e) {
+                    // General error, i.e.
+                    //  - ECONNRESET - server closed the socket unexpectedly
+                    //  - ECONNREFUSED - server did not listen
+                    //  - HPE_INVALID_VERSION
+                    //  - HPE_INVALID_STATUS
+                    //  - ... (other HPE_* codes) - server returned garbage
+
+                    console.log("WHACKA")
+
+                    console.log(e);
+                    callback(null, null);
                 });
-
-                // Descriptions
-
-                // Descriptions are a mystery.  Ask Andres!
-
-                // console.log(JSON.stringify(obj.feature.illustrations, undefined, 2));
-                obj.feature.illustrations.forEach(function (x) {
-                    var url = x.url;
-                    var type = x.type;
-
-                    addEntry(doc, 'illustration_' + type + '_url', url);
-
-                    // doc['illustration_' + type + '_url']=url;
-                });
-
-
-                // ANCESTORS!  by PERSPECTIVE
-
-                if (obj.feature.perspectives) {
-                    obj.feature.perspectives.forEach(function (pers) {
-                        pers.ancestors.forEach(function (x) {
-                            var ancestor = x.header;
-                            var ancestorid = x.id;
-
-                            if (!pers) {
-                                pers = { code: null };
-                            }
-                            // console.log("ANCESTOR: " + pers.code + ":" + ancestorid + ":" + ancestor);
-
-                            addEntry(doc, 'ancestors_' + pers.code, ancestor);
-                            addEntry(doc, 'ancestor_ids_' + pers.code, ancestorid);
-
-                        })
-                    });
-                } else {
-                    obj.feature.ancestors.forEach(function (x) {
-                    var ancestor = x.header;
-                    var ancestorid = x.id;
-
-                    var pers = "default";
-
-                    // console.log("ANCESTOR: " + pers+ ":" + ancestorid + ":" + ancestor);
-
-                    addEntry(doc, 'ancestors_' + pers, ancestor);
-                    addEntry(doc, 'ancestor_ids_' + pers, ancestorid);
-
-                });
-                }
-
-                doc.interactive_map_url = obj.feature.interactive_map_url;
-                doc.kmz_url = obj.feature.kmz_url;
-                doc.created_at = obj.feature.created_at;
-                doc.updated_at = obj.feature.updated_at;
-                doc.has_shapes = Boolean(obj.feature.has_shapes);
-                doc.has_altitudes = Boolean(obj.feature.has_altitudes);
-                if (obj.feature.closest_fid_with_shapes)
-                    doc.closest_fid_with_shapes = obj.feature.closest_fid_with_shapes;
-                doc.checksum = checksum(doc);
-
-                callback(null, doc);
-            }
-            catch (err) {
-                throw err;
-                console.log("Error: " + err);
-                console.log("Return was: " + raw.join('\n'));
-                callback(err, null);
-            }
-        });
-        res.on('error', function (e) {
-            // General error, i.e.
-            //  - ECONNRESET - server closed the socket unexpectedly
-            //  - ECONNREFUSED - server did not listen
-            //  - HPE_INVALID_VERSION
-            //  - HPE_INVALID_STATUS
-            //  - ... (other HPE_* codes) - server returned garbage
+            }).end();
+        } catch (e) {
+            console.log(">>>>>>>>>>>>>ERRRORRROROOORRRORROORORORRRRORRROR!>>>>>>>>>>>>>>");
             console.log(e);
-        });
-    }).end();
+            throw e;
+        }
+    });
 }
 
 
@@ -213,18 +275,33 @@ exports.checkEtag = function (kmapuid, callback) {
 
     http.request(options, function (res) {
 
-        console.log("Getting HEAD: " + JSON.stringify(options));
-        console.log("HEADERS: " + JSON.stringify(res.headers));
+        //console.log("Getting HEAD: " + JSON.stringify(options));
+        //console.log("HEADERS: " + JSON.stringify(res.headers));
 
-        if (res.headers.etag) {
-            callback(null, res.headers.etag);
-        } else {
-            callback(null, null);
-        }
+
+
+        res.on('end',function() {
+            if (res.headers.etag) {
+                callback(null, res.headers.etag);
+            } else {
+                callback(null, null);
+            }
+        });
+
+        res.on('error', function(e) {
+            console.log("CHUCKMUCK");
+            console.log(e);
+            callback(e);
+        });
+
 
     }).end();
 
 
+}
+
+exports.getVersion = function() {
+    return VERSION;
 }
 
 
@@ -276,6 +353,11 @@ exports.getKmapsTree = function (host, callback) {
                 obj = JSON.parse(raw.join(''));
                 // console.log("end: " + raw.join(''));
                 callback(null, obj);
+            });
+            res.on('error', function(e) {
+                console.log("BORTLES");
+                console.log(e);
+                callback(e);
             });
 
         }
