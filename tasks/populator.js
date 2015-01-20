@@ -147,7 +147,7 @@ exports.rangePopulateIndexByService = function (serviceConnector, start, finish,
 }
 
 exports.populateTermIndex = function(host, master_callback) {
-    const LIST_LIMIT = 10; // set to non-zero for testing ONLY
+    const LIST_LIMIT = 0; // set to non-zero for testing ONLY
     const CONCURRENCY = 5;
 
     var dom = domain.create();
@@ -289,7 +289,7 @@ exports.updateEntries = function(serviceConnector, master_callback) {
 
 
         docs.forEach( function(x) {
-            console.dir (x);
+            // console.dir (x);
         })
 
 

@@ -17,7 +17,8 @@
     "underscore": "*",
     "http-proxy": "*",
     "traverse": "*",
-    "xmldom": "*"
+    "xmldom": "*",
+      "guessLanguage": "*"
   },
   "devDependencies": {
     "coveralls": "^2.11.1",

@@ -2,7 +2,7 @@
  * Created by ys2n on 8/7/14.
  */
 
-const VERSION = 8;
+const VERSION = 2.3;
 var _ = require('underscore');
 var traverse = require('traverse');
 var http = require('http');
@@ -30,7 +30,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
     var kid = __ret.kid;
 
     var options = {
-        host: kclass + '.kmapsc.virginia.edu',
+        host: 'dev-' + kclass + '.kmaps.virginia.edu',
         port: 80,
         path: '/features/' + kid + ".json",
         method: 'GET'
@@ -64,16 +64,24 @@ exports.getKmapsDocument = function (kmapid, callback) {
 
                 res.on('end', function () {
                     var abbreviate = function (str) {
-                        var ab = "";
-                        var parts = str.match(/(\b[A-z]{1,3})/g);
-                        ab = parts.join("_").toLowerCase();
-                        return ab;
+                        var code = null;
+                        if (typeof str == 'string') {
+                            code = str;
+                        } else {
+                            code = (str.code.length != 0)?str.code:str.name;
+                        }
+                        if (code.match(/[A-Z\s]/)) {
+                            var parts = code.match(/(\b[A-z]{1,3})/g);
+                            code = parts.join("_").toLowerCase();
+                        }
+                        return code
+
                     }
                     try {
                         var obj = JSON.parse(raw.join(''));
                         doc._version_i = VERSION;
 
-                        // console.log("HOOOOOOOOOOOOOOPIE:" + JSON.stringify(obj, undefined, 2));
+ //                       console.log("HOOOOOOOOOOOOOOPIE:" + JSON.stringify(obj, undefined, 2));
 
                         if (res.headers.etag) {
                             doc.etag = res.headers.etag
@@ -100,10 +108,10 @@ exports.getKmapsDocument = function (kmapid, callback) {
 
 
                         // NEED TO USE THE names INTERFACE INSTEAD for completeness
-                        obj.feature.names.forEach(function (x) {
-                            var fieldname = "name_" + x.language + "_" + x.view + "_" + x.writing_system + ((x.orthographic_system) ? "_" + x.orthographic_system : "");
-                            doc[fieldname] = x.name;
-                        });
+                        //obj.feature.names.forEach(function (x) {
+                        //    var fieldname = "name_" + x.language + "_" + x.view + "_" + x.writing_system + ((x.orthographic_system) ? "_" + x.orthographic_system : "");
+                        //    doc[fieldname] = x.name;
+                        //});
 
                         if (obj.feature.captions) {
                             // Captions
@@ -198,18 +206,27 @@ exports.getKmapsDocument = function (kmapid, callback) {
 
                                 napi_res.on('end', function () {
                                     var napi_obj = JSON.parse(raw2.join(''));
-                                    // console.log(util.inspect(napi_obj, false, null));
+                                    console.log(util.inspect(napi_obj, false, null));
 
                                     // console.log("TRAVERSING: " + JSON.stringify(napi_obj));
                                     var names = traverse(napi_obj).reduce(function (acc, x) {
-                                        if (x && x.name && typeof x !== 'string') {
+                                        if (x && x.name && this.parent.key === "names" && typeof x !== 'string') {
                                             //console.log("============");
                                             //console.dir(x);
                                             //console.log("============");
-                                            var joined = "name_";
-                                            if (x.language) joined += abbreviate(x.language);
-                                            if (x.writing_system) joined += "_" + abbreviate(x.writing_system);
-                                            if (x.relationship) joined += "_" + abbreviate(x.relationship);
+                                            var joined = "name_"
+
+                                            if (x.language) {
+                                                joined += abbreviate(x.language)
+                                            }
+                                            if (x.relationship) {
+                                                if (typeof x.relationship == 'string' || x.relationship.code ) {
+                                                    joined += "_" + abbreviate(x.relationship);
+                                                }
+                                            }
+                                            if (x.writing_system) {
+                                                joined += "_" + abbreviate(x.writing_system);
+                                            }
                                             acc[joined] = x.name;
                                         }
                                         return acc;
