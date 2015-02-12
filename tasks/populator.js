@@ -119,8 +119,24 @@ exports.populateIndexByServiceId = function (serviceConnector, id, callback) {
 
     serviceConnector.getDocument(id, function(err, doc) {
         if (err) {
-            callback([], null);
-        } else {
+
+            //
+            //   TODO: HANDLE MISSING RESOURCE HERE?  CORRECT THIS LOGIC WHEN THE RETURN CHANGES
+            if (err.message == "Unexpected end of input") {
+                // THIS LOGIC IS PROBABLY NO LONGER APPLICABLE
+                console.error("HOLY MOLY ROLY POLY! : " + err.message);
+                sm.removeDoc(id);
+            } else {
+                if(err.status === 404) {
+                    var uid = err.uid;
+                    var action = err.action;
+                    console.log("ERROR: " + JSON.stringify(err, undefined, 2));
+                }
+                sm.removeDoc(uid, callback);
+            }
+    } else {
+            console.log("ADDING TO SOLR");
+            console.dir(doc);
             sm.addDocs([doc], callback);
         }
     });
@@ -130,6 +146,8 @@ exports.rangePopulateIndexByService = function (serviceConnector, start, finish,
     async.concatSeries(_.range(start,finish+1), function(id,cb){
         exports.populateIndexByServiceId(serviceConnector, id, function( err, ret) {
             if (err) {
+                console.log("ERRORSY BERRORS: " + JSON.stringify(err));
+                console.log("SERVICE CONNECTOR: " + serviceConnector);
                 console.log("There was an error for id = " + id + ".   Ignoring and returning null" );
                 cb(null,null);
             } else {
@@ -277,19 +295,21 @@ exports.populateTermIndex = function(host, master_callback) {
 
 }
 
-exports.updateEntries = function(serviceConnector, master_callback) {
+exports.updateEntries = function(serviceName, serviceConnector, master_callback) {
 
-    sm.getAssetDocs(serviceConnector, function(err, docs) {
-
-        console.error("serviceConnector = " + serviceConnector);
-        console.error("ERRRRRRRR: " + err);
-        console.error("DOCS: " + docs.length);
-
-        serviceConnector
-
+    sm.getAssetDocs(serviceName, function(err, docs) {
 
         docs.forEach( function(x) {
-            // console.dir (x);
+             console.dir (x);
+
+                serviceConnector.getDocument(x.id, function (a,b) {
+                    console.log ("a");
+                    console.dir(a);
+                    console.dir(b);
+
+
+                })
+
         })
 
 

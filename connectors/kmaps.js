@@ -30,7 +30,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
     var kid = __ret.kid;
 
     var options = {
-        host: 'dev-' + kclass + '.kmaps.virginia.edu',
+        host: kclass + '.kmaps.virginia.edu',
         port: 80,
         path: '/features/' + kid + ".json",
         method: 'GET'

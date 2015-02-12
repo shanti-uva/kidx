@@ -7,12 +7,24 @@
 var async = require('async');
 var populator = require('../tasks/populator');
 var _ = require('underscore');
+var traverse = require('traverse');
+var NodeCache = require('node-cache');
+
+
+var cache = new NodeCache();
 
 exports.getItemIdList = function (kid, callback) {
-//    var result  = $.ajax("http://mediabase.drupal-dev.shanti.virginia.edu/services/kmaps/" + kmapid);
+//    var result  = $.ajax("http://mediabase.drupal-test.shanti.virginia.edu/services/kmaps/" + kmapid);
     var http = require('http');
 
+    if (!kid || _.isUndefined(kid)) {
+        throw new Error("You need to specify a kmap id");
+    }
     // sloppy way of translating id...
+
+    // console.log("kid = " + kid);
+
+
     var kmapid = (kid.replace)?kid.replace('subjects-','').replace('places-','p'):kid;
 
     var options = {
@@ -26,8 +38,9 @@ exports.getItemIdList = function (kid, callback) {
 
     http.request(options,function (res) {
         var raw = [];
-//        console.log('STATUS: ' + res.statusCode);
-//        console.log('HEADERS: ' + JSON.stringify(res.headers));
+        console.log('OPTIONS: ' + JSON.stringify(options));
+        console.log('STATUS: ' + res.statusCode);
+        console.log('HEADERS: ' + JSON.stringify(res.headers));
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             raw.push(chunk);
@@ -35,6 +48,7 @@ exports.getItemIdList = function (kid, callback) {
 
         res.on('end', function () {
             var obj = JSON.parse(raw.join(''));
+            console.log(JSON.stringify(obj,undefined,2));
             ret = _.unique(obj.items);
             console.log("Lookup for kmapid " + kmapid + " returns " + ret);
             callback(null, ret);
@@ -53,7 +67,7 @@ exports.getItemIdList = function (kid, callback) {
 //    var http = require('http');
 //
 //    var options = {
-//        host: 'mediabase.drupal-dev.shanti.virginia.edu',
+//        host: 'mediabase.drupal-test.shanti.virginia.edu',
 //        port: 80,
 //        path: '/services/solrdoc/' + docid,
 //        method: 'GET'
@@ -99,63 +113,193 @@ exports.getItemIdList = function (kid, callback) {
 
 exports.getDocument = function (docid, callback) {
 
-    var http = require('http');
+    console.log("getDocument()");
+    //console.log(new Error("oof").stack);
 
-    var options = {
-        host: 'mediabase.drupal-dev.shanti.virginia.edu',
-        port: 80,
-        path: '/services/solrdoc/' + docid + ".json",
-        method: 'GET'
+    var http = require('http');
+    var getParentMap = function (type, callback) {
+
+        console.log("getDocument() getParentMap() called with type=" + type);
+
+        // consult cache
+
+        var cached_map = cache.get(type)[type];
+
+        if (_.isEmpty(cached_map)) {
+            http.request({
+                    host: 'dev-'+ type + '.kmaps.virginia.edu',
+                    port: 80,
+                    path: '/features/fancy_nested.json',
+                    method: 'GET'
+                },
+                function (res) {
+                    var raw = [];
+                    res.setEncoding('utf8');
+                    res.on('data', function (chunk) {
+                        //console.log("DATA: " + chunk);
+                        raw.push(chunk);
+                    });
+                    res.on('end', function () {
+                        var map = {};
+                        var tree = JSON.parse(raw.join(''));
+                        traverse(tree).forEach(function () {
+                            // console.log("HUHUHUHUHUH: " + this.key);
+                            if (this.node && this.key === "key") {
+
+                                //console.dir("PARENTS OF: " + this.node);
+                                //console.dir(this);
+                                var path = [];
+                                this.parents.map(function (x, y) {
+                                    if (x) {
+                                        // console.dir(x.parents);
+                                        var rents = x.parents.filter(function (x) {
+                                            return (x.node.key ? true : false);
+                                        });
+
+                                        path = rents.map(function (x) {
+                                            return type + "-" + x.node.key;
+                                        })
+                                    }
+                                });
+
+                                map[type + "-" + this.node] = path;
+
+                                // console.log (type + "-" + this.node + " : "  + JSON.stringify(path));
+
+                                // console.dir(path);
+                            }
+                        });
+                        console.log("DONE MAPPING:");
+                        //console.dir (map);
+
+                        // cache the map
+                        if (cache.set(type, map)) {
+                            console.log("parentMap successfully cached for " + type + " ! size: " + _.size(map) + " ?=== " + _.size(cache.get(type)));
+                        } else {
+                            throw new Error("Couldn't store parentMap!");
+                        }
+                        callback(null, map);
+                    });
+                }).end();
+        } else {
+            console.log("Using cached parent map for " + type );
+            // console.dir(cached_map);
+            callback(null,cached_map);
+        }
+    }
+
+    var getSolrDoc = function (parentMap, callback) {
+
+        var options = {
+            host: 'mediabase.drupal-dev.shanti.virginia.edu',
+            port: 80,
+            path: '/services/solrdoc/' + docid + ".json",
+            method: 'GET'
+        };
+
+        //console.dir(parentMap);
+
+        if (_.isEmpty(parentMap)) {
+            throw new Error("EMPTY parentMap");
+        }
+
+        console.log ("parentMap has size of: " + _.size(parentMap));
+
+        var doc = {};
+
+        console.log("Attempting to contact: " + JSON.stringify(options));
+
+        http.request(options, function (res) {
+            var raw = [];
+            console.log('STATUS: ' + res.statusCode);
+            console.log('HEADERS: ' + JSON.stringify(res.headers));
+            res.setEncoding('utf8');
+            res.on('data', function (chunk) {
+                //console.log("DATA: " + chunk);
+                raw.push(chunk);
+            });
+
+            res.on('end', function () {
+                var doc = {};
+                var obj;
+                try {
+                    switch (res.statusCode) {
+                        case 200:
+                            obj = JSON.parse(raw.join(''));
+                            // console.log(JSON.stringify(obj,undefined,2));
+                            doc = obj.doc;
+
+                            console.log("parentMap now has size of: " + _.size(parentMap));
+
+                            if (!_.isEmpty(parentMap)) {
+                                // console.dir (parentMap);
+                                doc.kmapid = doc.kmapid.map( function(x) {
+                                    if (parentMap[x]) {
+                                        return parentMap[x];
+                                    } else {
+                                        console.warn(" parentMap does not contain: " + x);
+                                        return [ x ];  // just return itself.
+                                    }
+                                });
+                                doc.kmapid = _.flatten(doc.kmapid);
+                            }
+                            doc.kmapid = _.unique(doc.kmapid);
+                            console.log("Return from mediabase: ");
+                            console.dir(doc);
+                            callback(null, doc);
+                            break;
+                        case 403:
+                            doc.kmapid = [];
+                            doc.error = "Forbidden " + res.statusCode + " (" + http.STATUS_CODES[res.statusCode] + ")";
+                            doc.status = res.statusCode;
+                            callback(doc, doc);
+                            break;
+                        case 404:
+                            doc = JSON.parse(raw.join(''));
+                            doc.action = "delete";
+                            doc.kmapid = [];
+                            doc.status = res.statusCode;
+                        default:
+                            if (doc.error) {
+                                doc.message = "Object deleted or missing:  return code " + res.statusCode + " (" + http.STATUS_CODES[res.statusCode] + ")";
+                            } else {
+                                doc.message = "Unhandled error return code " + res.statusCode + " (" + http.STATUS_CODES[res.statusCode] + ")";
+                            }
+                            callback(doc, doc);
+                    }
+
+                }
+                catch (err) {
+                    console.dir(err);
+                    console.log(err.stack);
+                    callback(err, doc);
+                }
+            })
+        }).end();
     };
 
-    var doc = {};
 
-    console.log("Attempting to contact: " + JSON.stringify(options));
+    async.waterfall(
+        [
+            function(callback) {
+                getParentMap("subjects", function(err, bigMap) {
+                    getParentMap("places", function(err, placesMap) {
+                        _.extend(bigMap, placesMap);
+                        callback(err, bigMap);
+                    })
+                });
 
-    http.request(options,function (res) {
-        var raw = [];
-        console.log('STATUS: ' + res.statusCode);
-        console.log('HEADERS: ' + JSON.stringify(res.headers));
-        res.setEncoding('utf8');
-        res.on('data', function (chunk) {
-            //console.log("DATA: " + chunk);
-            raw.push(chunk);
-        });
-
-        res.on('end', function () {
-            try {
-                var obj = JSON.parse(raw.join(''));
-                // console.log(JSON.stringify(obj,undefined,2));
-                var doc = obj.doc;
-                var kmapids = [];
-                if(doc.kmapid) doc.kmapid.forEach( function(x) {kmapids.push(x)});
-                var pdidnodes = [];
-                if(doc.pdid) doc.pdid.forEach( function(x) {kmapids.push(
-                    "places-" + x)});
-
-                if (res.headers.etag) { doc.etag = res.headers.etag }
-                doc.kmapid = _.unique(kmapids);
-                //doc.url = obj.url;
-                //doc.bundle = obj.bundle;
-                //// doc.description = obj.content;
-                //doc.summary = obj.content;
-                //doc.caption = obj.label;
-                //doc.id = obj.id;
-                //doc.service = "mediabase";
-                //doc.uid = doc.service + "-" + doc.id;
-                //doc.thumbnail_url = obj.thumbnail_url;
-                console.dir(doc);
-                callback(null,doc);
+            },
+            getSolrDoc],
+            function completed (err,ret) {
+                console.log("DONE");
+                callback(err,ret);
             }
-            catch(err) {
-                console.log("Error: " + err );
-                callback(err,null);
-            }
-        })
-    }).end();
+    )
 }
 
 exports.getDocumentsByDocIds = function(docids, callback) {
+    console.log("getDocumentsByDocIds()");
 
     async.waterfall(
         [
@@ -174,7 +318,7 @@ exports.getDocumentsByDocIds = function(docids, callback) {
             if (err) {
                 console.log("ERROR: " + err);
             }
-            // console.log("FINALLY:  " + JSON.stringify(results));
+            console.log("FINALLY:  " + JSON.stringify(results));
 
             callback(null,results);
         }
@@ -182,6 +326,8 @@ exports.getDocumentsByDocIds = function(docids, callback) {
 }
 
 exports.getDocumentsByKmapIdStale = function(kmapid, staletime, callback) {
+
+    console.log("getDocumentsByKmapIdStale()");
 
 
     async.waterfall(
@@ -232,6 +378,8 @@ exports.getDocumentsByKmapIdStale = function(kmapid, staletime, callback) {
 
 
 exports.getDocumentsByKmapId = function(kmapid, callback) {
+
+    console.log("getDocumentsByKmapId()");
 
     async.waterfall(
         [

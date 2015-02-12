@@ -45,10 +45,10 @@ if(false) {
     );
 }
 
-if(false) {
+if(true) {
     docuid_fixtures.forEach (
         function(x) {
-            exports["testPopulateDocument-" + x.uid] = function(test) {
+            exports["testPopulateMediabaseDocument-" + x.uid] = function(test) {
                 test.expect(1);
                 populator.populateIndexByServiceId(mb, x.uid, function(err,ret) {
 
@@ -144,26 +144,19 @@ kmapid_fixtures.forEach(
 )
 
 
-if (true)
+if (false)
 exports["eliminateOldEntries"] = function(test) {
     var mb = require("../connectors/mediabase");
     test.expect(1);
-    populator.updateEntries("mediabase_drupal-dev_shanti_virginia_edu", function(err,ret) {
+    populator.updateEntries("mediabase_drupal-dev_shanti_virginia_edu", mb, function(err,ret) {
         console.log("Err = " + err);
         console.log("Ret = " + ret);
         test.ok(true);
         test.done();
     })
-
-
 }
 
-
-
-
-
-
-if(false)
+if(true)
 exports["rangePopulateMediaBase"] = function(test) {
     var mb = require("../connectors/mediabase");
     test.expect(1);

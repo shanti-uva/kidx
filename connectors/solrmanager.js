@@ -53,6 +53,20 @@ exports.addDocs = function (docs, callback) {
 
 }
 
+exports.removeDoc = function (uid, callback) {
+    console.log("removeDoc called with uid = " + uid + " and callback = " + callback);
+    asset_client.autoCommit=false;
+    asset_client.delete("uid",uid, function(err,x) {
+        console.log("CALLBACK TO removeDoc");
+        console.dir("err: " + err);
+        console.dir("doc: " + x);
+    });
+    asset_client.commit();
+    if (callback) {
+        callback(null,null);
+    }
+}
+
 exports.lastUpdated = function (solrclient, uid, callback) {
     var query = solrclient.createQuery().q("uid:" + uid)
 
@@ -182,8 +196,8 @@ exports.addTerms = function (terms, callback) {
 }
 
 exports.getAssetDocs = function (service, callback) {
-    console.error("service = " + service);
-    var query = asset_client.createQuery().q({"service":service}).fl("id,service").rows(30000);
+    //console.error("service = " + service);
+     var query = asset_client.createQuery().q({"service":service}).fl("id,service").rows(30000);
     asset_client.search(query, function (err, obj) {
         if (err) {
             console.log("getAssetDocs() Error:");
