@@ -251,10 +251,9 @@ if (true) {
     }
 }
 
-if(true) {
+if(false) {
     kmapid_fixtures.forEach ( function(kmapfix) {
         exports["write test: " + kmapfix.id] = function (test) {
-            test.expect(1);
             km.getKmapsDocument(kmapfix.id, function (err, doc) {
                     console.log("KmapsDoc: " + JSON.stringify(doc,undefined,2));
                     sm.addTerms([ doc ],function(err, status) {
