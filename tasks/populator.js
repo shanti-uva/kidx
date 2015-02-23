@@ -136,7 +136,7 @@ exports.populateIndexByServiceId = function (serviceConnector, id, callback) {
             }
     } else {
             console.log("ADDING TO SOLR");
-            console.dir(doc);
+            // console.dir(doc);
             sm.addDocs([doc], callback);
         }
     });
@@ -223,8 +223,7 @@ exports.populateTermIndex = function(host, master_callback) {
                         console.log("Checking: (" + ord + ")");
                         if (doc !== null) {
 
-                            //console.error("HERES THE DOC " + ord + ":" + JSON.stringify(doc,undefined, 2));
-
+                            // console.error("HERES THE DOC " + ord + ":" + JSON.stringify(doc,undefined, 2));
 
                             var ck = doc.checksum;
                             var etag = doc.etag;
@@ -258,8 +257,8 @@ exports.populateTermIndex = function(host, master_callback) {
 
                                         console.log("CHECKSUMS: " + ck + " ::: " + recorded_ck);
                                         if (ck != recorded_ck) {
-                                            console.log("writing: " + JSON.stringify(doc, undefined, 2));
-                                            console.log("writing: (" + ord + ")");
+                                            //console.log("writing: " + JSON.stringify(doc, undefined, 2));
+                                             console.log("writing: (" + ord + ")");
                                             sm.addTerms([doc], function (err, response) {
                                                 if (err) {
                                                     console.trace("Calling back err from getKmapsDocument/getTermsEtag/getTermCheckSum/sm.addTerms callback.");
