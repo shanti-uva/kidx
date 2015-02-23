@@ -58,11 +58,6 @@ exports.getKmapsDocument = function (kmapid, callback) {
                 //console.log('STATUS: ' + res.statusCode);
                 //console.log('HEADERS: ' + JSON.stringify(res.headers));
                 res.setEncoding('utf8');
-                res.on('data', function (chunk) {
-                    raw.push(chunk);
-                });
-
-
                 res.on('error', function (e) {
                     // General error, i.e.
                     //  - ECONNRESET - server closed the socket unexpectedly
@@ -76,6 +71,10 @@ exports.getKmapsDocument = function (kmapid, callback) {
                     console.log(e);
                     callback(null, null);
                 });
+                res.on('data', function (chunk) {
+                    raw.push(chunk);
+                });
+
 
                 res.on('end', function () {
                     var abbreviate = function (str) {
@@ -215,6 +214,13 @@ exports.getKmapsDocument = function (kmapid, callback) {
                             http.request(napi_options, function (napi_res) {
                                 var raw2 = [];
                                 napi_res.setEncoding('utf8');
+
+
+                                napi_res.on('error', function (e) {
+                                    conosle.log("BOOFOO");
+                                    console.log(e);
+                                });
+
                                 napi_res.on('data', function (chunk2) {
                                     raw2.push(chunk2);
                                 });
@@ -252,10 +258,6 @@ exports.getKmapsDocument = function (kmapid, callback) {
                                     callback(null, doc);
                                 });
 
-                                napi_res.on('error', function (e) {
-                                    conosle.log("BOOFOO");
-                                    console.log(e);
-                                });
 
                             }).end();
                     }
@@ -297,7 +299,11 @@ exports.checkEtag = function (kmapuid, callback) {
         //console.log("Getting HEAD: " + JSON.stringify(options));
         //console.log("HEADERS: " + JSON.stringify(res.headers));
 
-
+        res.on('error', function(e) {
+            console.log("CHUCKMUCK");
+            console.log(e);
+            callback(e);
+        });
 
         res.on('end',function() {
             if (res.headers.etag) {
@@ -307,11 +313,6 @@ exports.checkEtag = function (kmapuid, callback) {
             }
         });
 
-        res.on('error', function(e) {
-            console.log("CHUCKMUCK");
-            console.log(e);
-            callback(e);
-        });
 
 
     }).end();
@@ -363,21 +364,25 @@ exports.getKmapsTree = function (host, callback) {
     var obj = {};
     http.request(kmaps_options,function (res) {
         try {
-            res.setEncoding('utf8');
-            res.on('data', function (chunk) {
-                // console.log("data: " + chunk);
-                raw.push(chunk);
-            });
-            res.on('end', function () {
-                obj = JSON.parse(raw.join(''));
-                // console.log("end: " + raw.join(''));
-                callback(null, obj);
-            });
+
             res.on('error', function(e) {
                 console.log("BORTLES");
                 console.log(e);
                 callback(e);
             });
+
+            res.setEncoding('utf8');
+            res.on('data', function (chunk) {
+                // console.log("data: " + chunk);
+                raw.push(chunk);
+            });
+
+            res.on('end', function () {
+                obj = JSON.parse(raw.join(''));
+                // console.log("end: " + raw.join(''));
+                callback(null, obj);
+            });
+
 
         }
         catch (err) {
