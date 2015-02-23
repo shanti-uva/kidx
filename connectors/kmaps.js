@@ -2,7 +2,7 @@
  * Created by ys2n on 8/7/14.
  */
 
-const VERSION = 2.3;
+const VERSION = 6;
 var _ = require('underscore');
 var traverse = require('traverse');
 var http = require('http');
@@ -221,7 +221,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
 
                                 napi_res.on('end', function () {
                                     var napi_obj = JSON.parse(raw2.join(''));
-                                    console.log(util.inspect(napi_obj, false, null));
+                                    //console.log(util.inspect(napi_obj, false, null));
 
                                     // console.log("TRAVERSING: " + JSON.stringify(napi_obj));
                                     var names = traverse(napi_obj).reduce(function (acc, x) {

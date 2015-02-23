@@ -204,7 +204,7 @@ exports.getAssetDocs = function (service, callback) {
             console.dir(err);
             callback(err);
         } else {
-            console.log("getAssetDocs(): " + JSON.stringify(obj,undefined,2));
+            // console.log("getAssetDocs(): " + JSON.stringify(obj,undefined,2));
             callback(null, obj.response.docs);
         }
     });
