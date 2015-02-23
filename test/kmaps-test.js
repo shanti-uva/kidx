@@ -227,7 +227,11 @@ if(true) {
 
 if (true) {
     exports["testGetKmapsTree"] = function(test) {
+<<<<<<< HEAD
         // // test.expect(1);
+=======
+        // test.expect(1);
+>>>>>>> 036951bdf260176159dcca2c3d70a035501184d1
         km.getKmapsTree("subjects.kmaps.virginia.edu", function(err,ret) {
             console.log("ERR: " + err);
             console.log("RET: " + ret);
