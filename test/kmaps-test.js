@@ -214,7 +214,7 @@ var sm = require('../connectors/solrmanager');
 if(true) {
     kmapid_fixtures.forEach ( function(kmapfix) {
         exports["getKmapsDocument-" + kmapfix.id] = function (test) {
-            test.expect(1);
+            // test.expect(1);
             km.getKmapsDocument(kmapfix.id, function (err, doc) {
                     console.log("KmapsDoc: " + JSON.stringify(doc,undefined,2));
                     test.ok(doc !== null);
@@ -227,7 +227,7 @@ if(true) {
 
 if (true) {
     exports["testGetKmapsTree"] = function(test) {
-        test.expect(1);
+        // // test.expect(1);
         km.getKmapsTree("subjects.kmaps.virginia.edu", function(err,ret) {
             console.log("ERR: " + err);
             console.log("RET: " + ret);
@@ -240,7 +240,7 @@ if (true) {
 
 if (true) {
     exports["testGetKmapsList"] = function(test) {
-        test.expect(2);
+        // test.expect(2);
         km.getKmapsList("subjects.kmaps.virginia.edu", function(err,ret) {
             console.log("ERR: " + err);
             console.log("RET: " + ret);

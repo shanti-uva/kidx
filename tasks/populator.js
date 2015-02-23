@@ -180,7 +180,10 @@ exports.populateTermIndex = function(host, master_callback) {
         function() {
         km.getKmapsList(host, function (err, list) {
             console.log("Err = " + err);
-            list = list.reverse();
+	    var coin = Math.floor(Math.random() * 2)
+            if (coin === 1) { 
+		list = list.reverse();
+	    }
 
             const JUMP = 0;
 

@@ -156,7 +156,7 @@ exports["eliminateOldEntries"] = function(test) {
     })
 }
 
-if(true)
+if(false)
 exports["rangePopulateMediaBase"] = function(test) {
     var mb = require("../connectors/mediabase");
     test.expect(1);
@@ -238,6 +238,25 @@ exports['getTermCheckSum-2'] = function(test) {
 }
 
 if (true)
+    exports["harvest subjects"] = function(test) {
+
+        test.expect(2);
+        populator.populateTermIndex(
+            "subjects.kmaps.virginia.edu",
+            function(err,ret) {
+                console.log("The Error = " + err);
+                if (err) {
+                    console.log("The stack = " + err.stack);
+                }
+                console.log("The Return = " + ret.length + " items");
+                test.ok(!err);
+                test.ok(ret !== null);
+                test.done();
+            });
+
+    }
+
+if (true)
     exports["harvest places"] = function(test) {
 
         process.on('uncaughtException', function (er) {
@@ -260,21 +279,3 @@ if (true)
     }
 
 
-if (true)
-    exports["harvest subjects"] = function(test) {
-
-        test.expect(2);
-        populator.populateTermIndex(
-            "subjects.kmaps.virginia.edu",
-            function(err,ret) {
-                console.log("The Error = " + err);
-                if (err) {
-                    console.log("The stack = " + err.stack);
-                }
-                console.log("The Return = " + ret.length + " items");
-                test.ok(!err);
-                test.ok(ret !== null);
-                test.done();
-            });
-
-    }
