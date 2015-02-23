@@ -305,6 +305,10 @@ exports.checkEtag = function (kmapuid, callback) {
             callback(e);
         });
 
+        res.on('data',function(x){
+
+        });
+
         res.on('end',function() {
             if (res.headers.etag) {
                 callback(null, res.headers.etag);
