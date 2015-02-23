@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cef4906-1aff-40b3-be14-ca98c680d1ad" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/populator-test.js" afterPath="$PROJECT_DIR$/test/populator-test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/populator.js" afterPath="$PROJECT_DIR$/tasks/populator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/connectors/kmaps.js" afterPath="$PROJECT_DIR$/connectors/kmaps.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="kidx.iws" />
@@ -35,18 +34,18 @@
       <file leaf-file-name="populator.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tasks/populator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.7777777" vertical-offset="3360" max-vertical-offset="5085">
-              <caret line="229" column="73" selection-start-line="229" selection-start-column="73" selection-end-line="229" selection-end-column="73" />
+            <state vertical-scroll-proportion="-5.111111" vertical-offset="2427" max-vertical-offset="5085">
+              <caret line="171" column="10" selection-start-line="171" selection-start-column="7" selection-end-line="171" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kmaps.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="kmaps.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/connectors/kmaps.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5267" max-vertical-offset="6360">
-              <caret line="359" column="11" selection-start-line="359" selection-start-column="4" selection-end-line="359" selection-end-column="11" />
+            <state vertical-scroll-proportion="3.101983" vertical-offset="0" max-vertical-offset="6435">
+              <caret line="73" column="22" selection-start-line="73" selection-start-column="19" selection-end-line="73" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -92,11 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="populator-test.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="populator-test.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/populator-test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.66005665" vertical-offset="3352" max-vertical-offset="4275">
-              <caret line="239" column="9" selection-start-line="239" selection-start-column="9" selection-end-line="239" selection-end-column="9" />
+            <state vertical-scroll-proportion="-4.0" vertical-offset="11844" max-vertical-offset="13680">
+              <caret line="249" column="11" selection-start-line="249" selection-start-column="8" selection-end-line="249" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -153,10 +152,10 @@
         <option value="$PROJECT_DIR$/connectors/mediabase.js" />
         <option value="$PROJECT_DIR$/test/mediabase-test.js" />
         <option value="$PROJECT_DIR$/test/kmaps-test.js" />
-        <option value="$PROJECT_DIR$/connectors/kmaps.js" />
         <option value="$PROJECT_DIR$/connectors/solrmanager.js" />
         <option value="$PROJECT_DIR$/tasks/populator.js" />
         <option value="$PROJECT_DIR$/test/populator-test.js" />
+        <option value="$PROJECT_DIR$/connectors/kmaps.js" />
       </list>
     </option>
   </component>
@@ -768,7 +767,13 @@
       <option name="project" value="LOCAL" />
       <updated>1424712098295</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="null guard if index entry doesn't exist.">
+      <created>1424712535744</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1424712535744</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -852,7 +857,8 @@
     <MESSAGE value="Better name processing.   Starting to separate scripts by parser (specifically Chinese from other UAX29 languages).   Added some test fixture kmap ids." />
     <MESSAGE value="Don't run the write test." />
     <MESSAGE value="quieter" />
-    <option name="LAST_COMMIT_MESSAGE" value="quieter" />
+    <MESSAGE value="null guard if index entry doesn't exist." />
+    <option name="LAST_COMMIT_MESSAGE" value="null guard if index entry doesn't exist." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1249,14 +1255,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/connectors/kmaps.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5267" max-vertical-offset="6360">
-          <caret line="359" column="11" selection-start-line="359" selection-start-column="4" selection-end-line="359" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/mediabase-test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="829" max-vertical-offset="3030">
@@ -1265,18 +1263,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tasks/populator.js">
+    <entry file="file://$PROJECT_DIR$/test/populator-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.7777777" vertical-offset="3360" max-vertical-offset="5085">
-          <caret line="229" column="73" selection-start-line="229" selection-start-column="73" selection-end-line="229" selection-end-column="73" />
+        <state vertical-scroll-proportion="-4.0" vertical-offset="11844" max-vertical-offset="13680">
+          <caret line="249" column="11" selection-start-line="249" selection-start-column="8" selection-end-line="249" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/populator-test.js">
+    <entry file="file://$PROJECT_DIR$/tasks/populator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66005665" vertical-offset="3352" max-vertical-offset="4275">
-          <caret line="239" column="9" selection-start-line="239" selection-start-column="9" selection-end-line="239" selection-end-column="9" />
+        <state vertical-scroll-proportion="-5.111111" vertical-offset="2427" max-vertical-offset="5085">
+          <caret line="171" column="10" selection-start-line="171" selection-start-column="7" selection-end-line="171" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/connectors/kmaps.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.101983" vertical-offset="0" max-vertical-offset="6435">
+          <caret line="73" column="22" selection-start-line="73" selection-start-column="19" selection-end-line="73" selection-end-column="22" />
           <folding />
         </state>
       </provider>
