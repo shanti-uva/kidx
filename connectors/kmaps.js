@@ -62,6 +62,21 @@ exports.getKmapsDocument = function (kmapid, callback) {
                     raw.push(chunk);
                 });
 
+
+                res.on('error', function (e) {
+                    // General error, i.e.
+                    //  - ECONNRESET - server closed the socket unexpectedly
+                    //  - ECONNREFUSED - server did not listen
+                    //  - HPE_INVALID_VERSION
+                    //  - HPE_INVALID_STATUS
+                    //  - ... (other HPE_* codes) - server returned garbage
+
+                    console.log("WHACKA")
+
+                    console.log(e);
+                    callback(null, null);
+                });
+
                 res.on('end', function () {
                     var abbreviate = function (str) {
                         var code = null;
@@ -251,19 +266,6 @@ exports.getKmapsDocument = function (kmapid, callback) {
                     }
                 });
 
-                res.on('error', function (e) {
-                    // General error, i.e.
-                    //  - ECONNRESET - server closed the socket unexpectedly
-                    //  - ECONNREFUSED - server did not listen
-                    //  - HPE_INVALID_VERSION
-                    //  - HPE_INVALID_STATUS
-                    //  - ... (other HPE_* codes) - server returned garbage
-
-                    console.log("WHACKA")
-
-                    console.log(e);
-                    callback(null, null);
-                });
             }).end();
         } catch (e) {
             console.log(">>>>>>>>>>>>>ERRRORRROROOORRRORROORORORRRRORRROR!>>>>>>>>>>>>>>");
