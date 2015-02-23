@@ -240,6 +240,12 @@ exports['getTermCheckSum-2'] = function(test) {
 if (true)
     exports["harvest subjects"] = function(test) {
 
+        process.on('uncaughtException', function (er) {
+            console.trace("UnCaught exception!");
+            console.error(er.stack)
+            process.exit(1)
+        })
+
         test.expect(2);
         populator.populateTermIndex(
             "subjects.kmaps.virginia.edu",

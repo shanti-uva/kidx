@@ -238,6 +238,10 @@ exports.populateTermIndex = function(host, master_callback) {
                                     return;
                                 }
 
+                                if (recorded_etag === null) {
+                                    recorded_etag = { etag: "", version:0 };
+                                }
+
                                 console.log("    ETAG: " + etag);
                                 console.log("Rec ETAG: " + recorded_etag.etag);
                                 console.log("VERSION: " + km.getVersion());
