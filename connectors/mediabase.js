@@ -9,9 +9,21 @@ var populator = require('../tasks/populator');
 var _ = require('underscore');
 var traverse = require('traverse');
 var NodeCache = require('node-cache');
-
-
 var cache = new NodeCache();
+
+
+var Settings = {
+    mediabase_host: 'mediabase.drupal-dev.shanti.virginia.edu',
+    mediabase_port: 80,
+    mediabase_kmaps_path: '/services/kmaps',
+    mediabase_solr_path: '/services/solrdoc',
+    kmaps_prefix: 'dev-',
+    kmaps_domain: 'kmaps.virginia.edu',
+    kmaps_port: 80,
+    kmaps_fancy_path: '/features/fancy_nested.json'
+}
+
+
 
 exports.getItemIdList = function (kid, callback) {
 //    var result  = $.ajax("http://mediabase.drupal-test.shanti.virginia.edu/services/kmaps/" + kmapid);
@@ -28,9 +40,9 @@ exports.getItemIdList = function (kid, callback) {
     var kmapid = (kid.replace)?kid.replace('subjects-','').replace('places-','p'):kid;
 
     var options = {
-        host: 'mediabase.drupal-dev.shanti.virginia.edu',
-        port: 80,
-        path: '/services/kmaps/' + kmapid + ".json",
+        host: Settings.mediabase_host,
+        port: Settings.mediabase_port,
+        path: Settings.mediabase_kmaps_path + "/" + kmapid + ".json",
         method: 'GET'
     };
 
@@ -124,16 +136,24 @@ exports.getDocument = function (docid, callback) {
         // consult cache
 
         var cached_map = cache.get(type)[type];
+        var httpParams = {
+            host: Settings.kmaps_prefix + type + '.' + Settings.kmaps_domain,
+            port: Settings.kmaps_port,
+            path: Settings.kmaps_fancy_path,
+            method: 'GET'
+        }
+        console.log(" Getting parentMap through:  " + JSON.stringify(httpParams));
 
         if (_.isEmpty(cached_map)) {
-            http.request({
-                    host: 'dev-'+ type + '.kmaps.virginia.edu',
-                    port: 80,
-                    path: '/features/fancy_nested.json',
-                    method: 'GET'
-                },
+            http.request(httpParams,
                 function (res) {
                     var raw = [];
+                    console.log("STATUS CODE: " + res.statusCode);
+
+                    if (res.statusCode !== 200) {
+                        throw new Error("ERROR CODE " + res.statusCode + " while contacting kmaps server");
+                    }
+
                     res.setEncoding('utf8');
                     res.on('data', function (chunk) {
                         //console.log("DATA: " + chunk);
@@ -142,6 +162,8 @@ exports.getDocument = function (docid, callback) {
                     res.on('end', function () {
                         var map = {};
                         var tree = JSON.parse(raw.join(''));
+                        console.log("RAW: " + raw);
+
                         traverse(tree).forEach(function () {
                             // console.log("HUHUHUHUHUH: " + this.key);
                             if (this.node && this.key === "key") {
@@ -180,7 +202,13 @@ exports.getDocument = function (docid, callback) {
                         }
                         callback(null, map);
                     });
+                    res.on('error', function (err) {
+                       console.dir(err);
+                    });
+                }).on('error', function(err) {
+                    console.error(err);
                 }).end();
+
         } else {
             console.log("Using cached parent map for " + type );
             // console.dir(cached_map);
@@ -191,16 +219,16 @@ exports.getDocument = function (docid, callback) {
     var getSolrDoc = function (parentMap, callback) {
 
         var options = {
-            host: 'mediabase.drupal-dev.shanti.virginia.edu',
-            port: 80,
-            path: '/services/solrdoc/' + docid + ".json",
+            host: Settings.mediabase_host,
+            port: Settings.mediabase_port,
+            path: Settings.mediabase_solr_path +"/"+ docid + ".json",
             method: 'GET'
         };
 
         //console.dir(parentMap);
 
         if (_.isEmpty(parentMap)) {
-            throw new Error("EMPTY parentMap");
+            console.error("EMPTY parentMap!");
         }
 
         console.log ("parentMap has size of: " + _.size(parentMap));

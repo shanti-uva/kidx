@@ -1,13 +1,17 @@
 
 var http = require('http');
+var Settings = {
+    essays_host: 'essays.drupal-dev.shanti.virginia.edu',
+    essays_path: '/shanti_kmaps_fields/api/node/'
+}
 
 exports.getDocument = function (docid, callback) {
 
     // http://essays.drupal-dev.shanti.virginia.edu/shanti_kmaps_fields/api/node/210
     var options = {
-        host: 'essays.drupal-dev.shanti.virginia.edu',
+        host: Settings.essays_host,
         port: 80,
-        path: '/shanti_kmaps_fields/api/node/' + docid,
+        path:  Settings.essays_path + docid,
         method: 'GET'
     };
 

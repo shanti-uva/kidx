@@ -11,6 +11,15 @@ var util = require('util');
 var domain = require('domain');
 // var async = require('async');
 
+var Settings = {
+    kmaps_prefix: "dev-",
+    kmaps_domain: "kmaps.virginia.edu",
+    kmaps_port: 80,
+    kmaps_fancy_path: '/features/fancy_nested.json'
+};
+
+
+
 function grokKClass(kmapid) {
     var parts = kmapid.split('-');
     var kclass = parts[0];
@@ -28,9 +37,11 @@ exports.getKmapsDocument = function (kmapid, callback) {
     var __ret = grokKClass(kmapid);
     var kclass = __ret.kclass;
     var kid = __ret.kid;
+    var pre = Settings.kmaps_prefix;
+
 
     var options = {
-        host: kclass + '.kmaps.virginia.edu',
+        host: pre + kclass + '.' + Settings.kmaps_domain,
         port: 80,
         path: '/features/' + kid + ".json",
         method: 'GET'
@@ -284,9 +295,10 @@ exports.checkEtag = function (kmapuid, callback) {
     var __ret = grokKClass(kmapuid);
     var kclass = __ret.kclass;
     var kid = __ret.kid;
+    var pre = Settings.kmaps_prefix;
 
     var options = {
-        host: kclass + '.kmaps.virginia.edu',
+        host: pre + kclass + Settings.kmaps_domain,
         port: 80,
         path: '/features/' + kid + ".json",
         method: 'HEAD'
@@ -357,8 +369,8 @@ function addEntry(doc, field, data) {
 exports.getKmapsTree = function (host, callback) {
     var kmaps_options = {
         host: host,
-        port: 80,
-        path: '/features/fancy_nested.json',
+        port: Settings.kmaps_port,
+        path: Settings.kmaps_fancy_path,
         method: 'GET'
     };
 
