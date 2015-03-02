@@ -176,13 +176,6 @@ exports.getTermCheckSum = function (uid, callback) {
 }
 
 
-
-
-
-
-
-
-
 exports.addTerms = function (terms, callback) {
     term_client.autoCommit = true;
     term_client.add(terms, function (err, report) {

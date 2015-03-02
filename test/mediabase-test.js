@@ -61,7 +61,7 @@ if (TEST_LEVEL >= 3)
         exports["getDocument-" + fixdoc.id] = function(test) {
             test.expect(1);
             mb.getDocument(fixdoc.id, function (err, doc) {
-                console.log(JSON.stringify(doc));
+                console.log("HOHOHO: " + JSON.stringify(doc));
                 console.log("doc.kmapid: " + JSON.stringify(doc.kmapid));
                 test.equals(doc.kmapid.length, fixdoc.count, "kmapid counts are off.  Should be: { id: " + fixdoc.id + ", count: " + doc.kmapid.length + " }");
                 console.log("===== HERE'S THE DOC =====");

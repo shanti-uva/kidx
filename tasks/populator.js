@@ -83,6 +83,7 @@ exports.getDocumentsByKMapIdStale = function(kmapid, staletime, callback) {
 
 
 exports.populateIndexByKMapId = function(kmapid, callback) {
+    throw new Error("DO NOT USE:  for now.");
 //    console.trace("calling getDocumentsByKmapId with kmapid = " + kmapid);
     exports.getDocumentsByKMapId(kmapid,
             function (err, docs) {
@@ -143,6 +144,7 @@ exports.populateIndexByServiceId = function (serviceConnector, id, callback) {
 }
 
 exports.rangePopulateIndexByService = function (serviceConnector, start, finish, callback) {
+    throw new Error("DO NOT USE: for now");
     async.concatSeries(_.range(start,finish+1), function(id,cb){
         exports.populateIndexByServiceId(serviceConnector, id, function( err, ret) {
             if (err) {
@@ -165,6 +167,7 @@ exports.rangePopulateIndexByService = function (serviceConnector, start, finish,
 }
 
 exports.populateTermIndex = function(host, master_callback) {
+
     const LIST_LIMIT = 0; // set to non-zero for testing ONLY
     const CONCURRENCY = 5;
 
