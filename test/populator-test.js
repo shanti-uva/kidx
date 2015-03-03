@@ -45,7 +45,7 @@ if(false) {
     );
 }
 
-if(true) {
+if(false) {
     docuid_fixtures.forEach (
         function(x) {
             exports["testPopulateMediabaseDocument-" + x.uid] = function(test) {
@@ -218,7 +218,7 @@ if(false)
         });
     }
 
-
+if (false)
 exports['getTermCheckSum'] = function(test) {
     test.expect(1);
     populator.getTermCheckSum("subjects-3824", function(err,ck) {
@@ -228,6 +228,7 @@ exports['getTermCheckSum'] = function(test) {
     });
 }
 
+if (false)
 exports['getTermCheckSum-2'] = function(test) {
     test.expect(1);
     populator.getTermCheckSum("places-5229", function(err,ck) {

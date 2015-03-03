@@ -17,7 +17,7 @@ var Settings = {
     mediabase_port: 80,
     mediabase_kmaps_path: '/services/kmaps',
     mediabase_solr_path: '/services/solrdoc',
-    kmaps_prefix: 'dev-',
+    kmaps_prefix: '',
     kmaps_domain: 'kmaps.virginia.edu',
     kmaps_port: 80,
     kmaps_fancy_path: '/features/fancy_nested.json'
