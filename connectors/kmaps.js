@@ -2,7 +2,7 @@
  * Created by ys2n on 8/7/14.
  */
 
-const VERSION = 6;
+const VERSION = 8;
 var _ = require('underscore');
 var traverse = require('traverse');
 var http = require('http');

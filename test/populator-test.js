@@ -239,6 +239,29 @@ exports['getTermCheckSum-2'] = function(test) {
 }
 
 if (true)
+    exports["harvest places"] = function(test) {
+
+        process.on('uncaughtException', function (er) {
+            console.trace("UnCaught exception!");
+            console.error(er.stack)
+            process.exit(1)
+        })
+
+        test.expect(2);
+        populator.populateTermIndex(
+            "places.kmaps.virginia.edu",
+            function(err,ret) {
+                console.log("The Error = " + err);
+                console.log("The Return = " + ret.length + " items");
+                test.ok(!err);
+                test.ok(ret !== null);
+                test.done();
+            });
+
+    }
+
+
+if (true)
     exports["harvest subjects"] = function(test) {
 
         process.on('uncaughtException', function (er) {
@@ -262,27 +285,4 @@ if (true)
             });
 
     }
-
-if (true)
-    exports["harvest places"] = function(test) {
-
-        process.on('uncaughtException', function (er) {
-            console.trace("UnCaught exception!");
-            console.error(er.stack)
-            process.exit(1)
-        })
-
-        test.expect(2);
-        populator.populateTermIndex(
-            "places.kmaps.virginia.edu",
-            function(err,ret) {
-                console.log("The Error = " + err);
-                console.log("The Return = " + ret.length + " items");
-                test.ok(!err);
-                test.ok(ret !== null);
-                test.done();
-            });
-
-    }
-
 

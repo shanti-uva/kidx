@@ -183,6 +183,7 @@ exports.addTerms = function (terms, callback) {
             console.log(err);
         } else {
             // console.log(report);
+		term_client.commit();
         }
         callback(err, report);
     });
