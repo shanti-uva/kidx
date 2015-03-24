@@ -9,7 +9,7 @@ var asset_index_options = {
     'host': 'kidx.shanti.virginia.edu',
     'port': 80,
     'path': '/solr',
-    'core': 'kmindex-test'
+    'core': 'kmindex-dev'
 }
 
 //var asset_index_options = {
@@ -23,7 +23,7 @@ var term_index_options = {
     'host': 'kidx.shanti.virginia.edu',
     'port': 80,
     'path': '/solr',
-    'core': 'termindex-test'
+    'core': 'termindex-dev'
 }
 
 //var term_index_options = {
