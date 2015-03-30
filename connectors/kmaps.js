@@ -270,14 +270,15 @@ exports.getKmapsDocument = function (kmapid, callback) {
                                     callback(null, doc);
                                     res.resume();
                                 });
-
-
                             }).end();
                     }
                     catch (err) {
                         console.log("Error: " + err);
                         console.log("Return was: " + raw.join('\n'));
                         callback(null, null);
+                    }
+                    finally {
+                        res.resume();
                     }
                 });
 
@@ -329,6 +330,7 @@ exports.checkEtag = function (kmapuid, callback) {
             } else {
                 callback(null, null);
             }
+            res.resume();
         });
 
 
@@ -399,6 +401,7 @@ exports.getKmapsTree = function (host, callback) {
                 obj = JSON.parse(raw.join(''));
                 // console.log("end: " + raw.join(''));
                 callback(null, obj);
+                res.resume();
             });
 
 
