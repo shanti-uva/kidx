@@ -238,7 +238,7 @@ exports['getTermCheckSum-2'] = function(test) {
     });
 }
 
-if (false)
+if (true)
     exports["harvest places"] = function(test) {
 
         process.on('uncaughtException', function (er) {
