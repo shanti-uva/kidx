@@ -57,7 +57,7 @@ exports.removeDoc = function (uid, callback) {
     console.log("removeDoc called with uid = " + uid + " and callback = " + callback);
     asset_client.autoCommit=false;
     asset_client.delete("uid",uid, function(err,x) {
-        console.log("CALLBACK TO removeDoc");
+        // console.log("CALLBACK TO removeDoc");
         console.dir("err: " + err);
         console.dir("doc: " + x);
     });
@@ -77,7 +77,7 @@ exports.lastUpdated = function (solrclient, uid, callback) {
         } else {
             console.log("assetLastUpdated(): " + JSON.stringify(obj, undefined, 2));
             if (obj.response.numFound == 0) {
-                console.log("calling back null,0 to " + callback);
+                console.log("calling back null,0");
                 callback(null, 0);
             } else if (obj.response.docs[0].timestamp) {
                 callback(null, new Date(obj.response.docs[0].timestamp).getTime());
@@ -105,9 +105,9 @@ exports.getAssetEtag = function (uid, callback) {
             console.log("getAssetEtag() Error:");
             console.dir(err);
         } else {
-            console.log("getAssetEtag(): " + JSON.stringify(obj,undefined,2));
+            // console.log("getAssetEtag(): " + JSON.stringify(obj,undefined,2));
             if (obj.response.numFound == 0) {
-                console.log("calling back null,null to " + callback);
+                // console.log("calling back null,null to " + callback);
                 callback(null, null);
             } else if (obj.response.docs[0].etag) {
                 callback(null, obj.response.docs[0].etag);
@@ -134,7 +134,7 @@ exports.getTermEtag = function (kid, callback) {
             } else {
                 // console.log("getTermEtag(): " + JSON.stringify(obj,undefined,2));
                 if (obj.response.numFound == 0) {
-                    console.log("calling back null,null to " + callback);
+                    console.log("calling back null,null ");
                     callback(null, null);
                 } else if (obj.response.docs[0].etag) {
                     callback(null, {'etag':obj.response.docs[0].etag, 'version':obj.response.docs[0]._version_i });
@@ -160,7 +160,7 @@ exports.getTermCheckSum = function (uid, callback) {
             } else {
                 // console.log("getTermCheckSum(): " + JSON.stringify(obj,undefined,2));
                 if (obj.response.numFound == 0) {
-                    console.log("calling back null,null to " + callback);
+                    console.log("calling back null,null ");
                     callback(null, null);
                 } else if (obj.response.docs[0].checksum) {
                     callback(null, obj.response.docs[0].checksum);
@@ -176,14 +176,17 @@ exports.getTermCheckSum = function (uid, callback) {
 }
 
 
-exports.addTerms = function (terms, callback) {
+exports.addTerms = function (terms, callback, commit) {
+    commit = commit || true;
     term_client.autoCommit = true;
     term_client.add(terms, function (err, report) {
         if (err) {
             console.log(err);
         } else {
             // console.log(report);
-		term_client.commit();
+		if (commit) {
+			term_client.commit();
+		}
         }
         callback(err, report);
     });

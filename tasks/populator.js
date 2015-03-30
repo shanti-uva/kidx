@@ -232,7 +232,7 @@ exports.populateTermIndex = function(host, master_callback) {
                             var etag = doc.etag;
                             var version = + doc._version_i;
 
-                            console.log("Checking ETAG (" + ord + ")");
+                            // console.log("Checking ETAG (" + ord + ")");
                             sm.getTermEtag(doc.id, function (err, recorded_etag) {
 
                                 if (err) {
@@ -245,13 +245,12 @@ exports.populateTermIndex = function(host, master_callback) {
                                     recorded_etag = { etag: "", version:0 };
                                 }
 
-                                console.log("    ETAG: " + etag);
-                                console.log("Rec ETAG: " + recorded_etag.etag);
-                                console.log("VERSION: " + km.getVersion());
-                                console.log("REC VERSION: " + recorded_etag.version);
 
                                 if (etag !== recorded_etag.etag || recorded_etag.version !== km.getVersion()) {
-
+                                    console.log("    ETAG: " + etag);
+                                    console.log("Rec ETAG: " + recorded_etag.etag);
+                                    console.log("VERSION: " + km.getVersion());
+                                    console.log("REC VERSION: " + recorded_etag.version);
                                     console.log("Checking TermCheckSum (" + ord + ")");
                                     sm.getTermCheckSum(doc.id, function (err, recorded_ck) {
 
@@ -263,6 +262,7 @@ exports.populateTermIndex = function(host, master_callback) {
                                         };
 
                                         console.log("CHECKSUMS: " + ck + " ::: " + recorded_ck);
+					var force_commit = ( Math.floor(Math.random() * 10) == 0 );
                                         if (ck != recorded_ck) {
                                             //console.log("writing: " + JSON.stringify(doc, undefined, 2));
                                              console.log("writing: (" + ord + ")");
@@ -272,7 +272,7 @@ exports.populateTermIndex = function(host, master_callback) {
                                                 }
                                                 // console.dir(response);
                                                 callback(err, response);
-                                            });
+                                            }, force_commit);
                                         } else {
                                             // console.log("skipping...  checksums match: " + ck + " === " + recorded_ck);
                                             callback(null, {"skipping": "checksums match"})

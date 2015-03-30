@@ -2,7 +2,7 @@
  * Created by ys2n on 8/7/14.
  */
 
-const VERSION = 8;
+const VERSION = 10;
 var _ = require('underscore');
 var traverse = require('traverse');
 var http = require('http');
@@ -49,7 +49,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
 
     var doc = {};
 
-    console.log("Attempting to contact: " + JSON.stringify(options));
+    // console.log("Attempting to contact: " + JSON.stringify(options));
 
     var dom = domain.create();
 
@@ -304,7 +304,7 @@ exports.checkEtag = function (kmapuid, callback) {
         method: 'HEAD'
     };
 
-    console.log("trying " + JSON.stringify(options));
+    // console.log("trying " + JSON.stringify(options));
 
     http.request(options, function (res) {
 
@@ -374,7 +374,7 @@ exports.getKmapsTree = function (host, callback) {
         method: 'GET'
     };
 
-    console.log("TRyING: " + JSON.stringify(kmaps_options));
+    // console.log("TRyING: " + JSON.stringify(kmaps_options));
 
     var raw = [];
     var obj = {};
