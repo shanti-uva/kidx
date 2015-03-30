@@ -140,6 +140,7 @@ exports.getTermEtag = function (kid, callback) {
                     callback(null, {'etag':obj.response.docs[0].etag, 'version':obj.response.docs[0]._version_i });
                 }
             }
+
         });
     },  function (err, result) {
         callback(err,result);

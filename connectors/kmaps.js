@@ -268,6 +268,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
                                     _.extend(doc, names);
                                     doc.checksum = checksum(doc);
                                     callback(null, doc);
+                                    res.resume();
                                 });
 
 
