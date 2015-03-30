@@ -15,7 +15,8 @@ var Settings = {
     kmaps_prefix: "",
     kmaps_domain: "kmaps.virginia.edu",
     kmaps_port: 80,
-    kmaps_fancy_path: '/features/fancy_nested.json'
+    // kmaps_fancy_path: '/features/fancy_nested.json'
+    kmaps_fancy_path: '/features/all.json'
 };
 
 
@@ -415,6 +416,9 @@ exports.getKmapsList = function (host, callback) {
         var nodes = traverse(obj).reduce(function (acc, x) {
             if (x.key) {
                 acc.push(x.key)
+            }
+            if (x.id) {
+                acc.push(x.id)
             }
             ;
             return acc;
