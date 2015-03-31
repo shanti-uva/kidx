@@ -11,6 +11,11 @@ var util = require('util');
 var domain = require('domain');
 // var async = require('async');
 
+
+var napi_count = 0;
+var kget_count = 0;
+var kmap_count = 0;
+
 var Settings = {
     kmaps_prefix: "",
     kmaps_domain: "kmaps.virginia.edu",
@@ -66,6 +71,8 @@ exports.getKmapsDocument = function (kmapid, callback) {
                 var raw = [];
 
                 var doc = {};
+		
+		console.log("COUNT kget= " + ( ++kget_count ));
 
                 //console.log('STATUS: ' + res.statusCode);
                 //console.log('HEADERS: ' + JSON.stringify(res.headers));
@@ -224,9 +231,9 @@ exports.getKmapsDocument = function (kmapid, callback) {
                         var napi_options = JSON.parse(JSON.stringify(options));
                         napi_options.path = '/features/' + kid + "/names.json",
                             http.request(napi_options, function (napi_res) {
+				console.log("COUNT NAPI checkout: " + (++napi_count));
                                 var raw2 = [];
                                 napi_res.setEncoding('utf8');
-
 
                                 napi_res.on('error', function (e) {
                                     conosle.log("BOOFOO");
@@ -268,7 +275,8 @@ exports.getKmapsDocument = function (kmapid, callback) {
                                     _.extend(doc, names);
                                     doc.checksum = checksum(doc);
                                     callback(null, doc);
-                                    res.resume();
+                                    napi_res.resume();
+				    console.log("COUNT napi = " + ( --napi_count ));
                                 });
                             }).end();
                     }
@@ -279,6 +287,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
                     }
                     finally {
                         res.resume();
+			console.log("COUNT kget= " + ( --kget_count ));
                     }
                 });
 
@@ -314,6 +323,8 @@ exports.checkEtag = function (kmapuid, callback) {
         //console.log("Getting HEAD: " + JSON.stringify(options));
         //console.log("HEADERS: " + JSON.stringify(res.headers));
 
+	console.log ("COUNT etag = " + (++etag_count));	
+
         res.on('error', function(e) {
             console.log("CHUCKMUCK");
             console.log(e);
@@ -331,6 +342,7 @@ exports.checkEtag = function (kmapuid, callback) {
                 callback(null, null);
             }
             res.resume();
+	    console.log ("COUNT etag = " + (--etag_count));	
         });
 
 
@@ -385,6 +397,7 @@ exports.getKmapsTree = function (host, callback) {
     http.request(kmaps_options,function (res) {
         try {
 
+	console.log("COUNT kmap checkout: " + (++kmap_count));
             res.on('error', function(e) {
                 console.log("BORTLES");
                 console.log(e);
@@ -402,6 +415,7 @@ exports.getKmapsTree = function (host, callback) {
                 // console.log("end: " + raw.join(''));
                 callback(null, obj);
                 res.resume();
+		console.log("COUNT kmap checkin: " + (--kmap_count));
             });
 
 
