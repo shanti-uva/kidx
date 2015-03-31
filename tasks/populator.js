@@ -188,7 +188,7 @@ exports.populateTermIndex = function(host, master_callback) {
 		list = list.reverse();
 	    }
 
-            const JUMP = 0;
+            const JUMP = Math.floor(Math.random() * list.length);
 
             // truncating filter useful for testing.
             if (LIST_LIMIT) {
@@ -196,15 +196,26 @@ exports.populateTermIndex = function(host, master_callback) {
             }
 
 
+
+            console.log("LIST length before = " + list.length);
+
+
+            list = _.unique(list,false);
+
+
             if (JUMP) {
-                list = _.last(list, (list.length - JUMP));
+                var last = _.last(list, (list.length - JUMP));
+                var first = _.first(list, (JUMP));
+                list = _.union(last,first);
             }
+
+            console.log("LIST length after = " + list.length);
 
 
             async.mapLimit(list, CONCURRENCY, function iterator(kid, callback) {
 
 //                console.log("host = " + host);
-                    var ord = (_.indexOf(list, kid, false) + 1 + JUMP) + "/" + (list.length + JUMP);
+                    var ord = (_.indexOf(list, kid, false) + 1) + "/" + (list.length);
                     console.log("======= (" + ord + ") kid = " + kid  + " ========");
 
 /////  ARGH THIS IS JUST WRONG!  REFACTOR THIS SUCKER! /////////
