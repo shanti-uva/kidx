@@ -195,12 +195,11 @@ exports.populateTermIndex = function(host, master_callback) {
                 list = _.first(list, LIST_LIMIT);
             }
 
-
-
             console.log("LIST length before = " + list.length);
 
 
-            list = _.unique(list,false);
+            list.sort(function(a, b){return a-b});
+            // list = _.unique(list,false);
 
 
             if (JUMP) {
