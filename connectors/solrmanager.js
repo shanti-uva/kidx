@@ -9,7 +9,7 @@ var asset_index_options = {
     'host': 'kidx.shanti.virginia.edu',
     'port': 80,
     'path': '/solr',
-    'core': 'kmindex-dev'
+    'core': 'kmindex'
 }
 
 //var asset_index_options = {
@@ -23,7 +23,7 @@ var term_index_options = {
     'host': 'kidx.shanti.virginia.edu',
     'port': 80,
     'path': '/solr',
-    'core': 'termindex-dev'
+    'core': 'termindex'
 }
 
 //var term_index_options = {
@@ -125,7 +125,7 @@ exports.getTermEtag = function (kid, callback) {
     //   WHAT CONSTITUTES SUCCESS, and WHAT CONSTITUTES FAILURE HERE?
 
     async.retry(RETRY_LIMIT, function (callback, results) {
-        console.log("Trying... "  + "kid = " + kid);
+        // console.log("Trying... "  + "kid = " + kid);
         term_client.search(query, function (err, obj) {
             if (err) {
                 console.log("getTermEtag() Error for kid = " + kid + ":");
@@ -180,6 +180,7 @@ exports.getTermCheckSum = function (uid, callback) {
 exports.addTerms = function (terms, callback, commit) {
     commit = commit || true;
     term_client.autoCommit = true;
+    console.log("adding to " + JSON.stringify(term_index_options));
     term_client.add(terms, function (err, report) {
         if (err) {
             console.log(err);

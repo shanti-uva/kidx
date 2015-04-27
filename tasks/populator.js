@@ -234,7 +234,7 @@ exports.populateTermIndex = function(host, master_callback) {
                             console.log("Error retrieving " + kid);
                             callback(null, {"ignored error": err});
                         }
-                        console.log("Checking: (" + ord + ")");
+                        // console.log("Checking: (" + ord + ")");
                         if (doc !== null) {
 
                             // console.error("HERES THE DOC " + ord + ":" + JSON.stringify(doc,undefined, 2));
