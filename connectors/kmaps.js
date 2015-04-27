@@ -2,7 +2,7 @@
  * Created by ys2n on 8/7/14.
  */
 
-const VERSION = 10;
+const VERSION = 11;
 var _ = require('underscore');
 var traverse = require('traverse');
 var http = require('http');
@@ -17,11 +17,11 @@ var kget_count = 0;
 var kmap_count = 0;
 
 var Settings = {
-    kmaps_prefix: "",
+    kmaps_prefix: "dev-",
     kmaps_domain: "kmaps.virginia.edu",
     kmaps_port: 80,
     // kmaps_fancy_path: '/features/fancy_nested.json'
-    kmaps_fancy_path: '/features/all.json'
+    kmaps_fancy_path: '/features/list.json'
 };
 
 
@@ -72,7 +72,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
 
                 var doc = {};
 		
-		console.log("COUNT kget= " + ( ++kget_count ));
+		if (++kget_count > 1) console.log("COUNT kget= " + ( kget_count ));
 
                 //console.log('STATUS: ' + res.statusCode);
                 //console.log('HEADERS: ' + JSON.stringify(res.headers));
@@ -231,7 +231,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
                         var napi_options = JSON.parse(JSON.stringify(options));
                         napi_options.path = '/features/' + kid + "/names.json",
                             http.request(napi_options, function (napi_res) {
-				console.log("COUNT NAPI checkout: " + (++napi_count));
+				if (++napi_count > 1) console.log("COUNT NAPI checkout: " + (napi_count));
                                 var raw2 = [];
                                 napi_res.setEncoding('utf8');
 
@@ -276,7 +276,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
                                     doc.checksum = checksum(doc);
                                     callback(null, doc);
                                     napi_res.resume();
-				    console.log("COUNT napi = " + ( --napi_count ));
+				    if (--napi_count !== 0) console.log("COUNT napi = " + ( napi_count ));
                                 });
                             }).end();
                     }
@@ -287,7 +287,7 @@ exports.getKmapsDocument = function (kmapid, callback) {
                     }
                     finally {
                         res.resume();
-			console.log("COUNT kget= " + ( --kget_count ));
+			if (--kget_count !== 0) console.log("COUNT kget= " + ( kget_count ));
                     }
                 });
 
@@ -323,7 +323,7 @@ exports.checkEtag = function (kmapuid, callback) {
         //console.log("Getting HEAD: " + JSON.stringify(options));
         //console.log("HEADERS: " + JSON.stringify(res.headers));
 
-	console.log ("COUNT etag = " + (++etag_count));	
+	if (++etag_count > 1) console.log ("COUNT etag = " + (etag_count));	
 
         res.on('error', function(e) {
             console.log("CHUCKMUCK");
@@ -342,7 +342,7 @@ exports.checkEtag = function (kmapuid, callback) {
                 callback(null, null);
             }
             res.resume();
-	    console.log ("COUNT etag = " + (--etag_count));	
+	    if (--etag_count !== 0) console.log ("COUNT etag = " + (etag_count));	
         });
 
 
@@ -397,7 +397,7 @@ exports.getKmapsTree = function (host, callback) {
     http.request(kmaps_options,function (res) {
         try {
 
-	console.log("COUNT kmap checkout: " + (++kmap_count));
+	if (++kmap_count > 1) console.log("COUNT kmap checkout: " + (kmap_count));
             res.on('error', function(e) {
                 console.log("BORTLES");
                 console.log(e);
@@ -415,7 +415,7 @@ exports.getKmapsTree = function (host, callback) {
                 // console.log("end: " + raw.join(''));
                 callback(null, obj);
                 res.resume();
-		console.log("COUNT kmap checkin: " + (--kmap_count));
+		if (--kmap_count !== 0) console.log("COUNT kmap checkin: " + (kmap_count));
             });
 
 
