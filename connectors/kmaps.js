@@ -21,7 +21,7 @@ var Settings = {
     kmaps_domain: "kmaps.virginia.edu",
     kmaps_port: 80,
     // kmaps_fancy_path: '/features/fancy_nested.json'
-    kmaps_fancy_path: '/features/all.json'
+    kmaps_fancy_path: '/features/list.json'
 };
 
 
